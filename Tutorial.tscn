@@ -1,37 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://duce7pumqt6v3"]
+[gd_scene load_steps=9 format=3 uid="uid://duce7pumqt6v3"]
 
 [ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://player.tscn" id="1_jl26d"]
+[ext_resource type="PackedScene" uid="uid://b5txbjxbfhejj" path="res://scenes/tower/TestTower.tscn" id="2_5s8la"]
+[ext_resource type="PackedScene" uid="uid://bpeocd8rfiow5" path="res://scenes/sewer/TestSewer.tscn" id="3_fr6qw"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_5s8la"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jl26d"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fr6qw"]
-points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+[sub_resource type="Sky" id="Sky_5s8la"]
+sky_material = SubResource("PanoramaSkyMaterial_jl26d")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oiqhk"]
-points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+[sub_resource type="Environment" id="Environment_fr6qw"]
+background_mode = 2
+sky = SubResource("Sky_5s8la")
+ambient_light_source = 3
+ambient_light_color = Color(0, 0.9087398, 0.9472402, 1)
+fog_enabled = true
+fog_light_energy = 0.3
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_oiqhk"]
+
+[sub_resource type="Compositor" id="Compositor_p3v23"]
 
 [node name="Tutorial" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fr6qw")
+camera_attributes = SubResource("CameraAttributesPractical_oiqhk")
+compositor = SubResource("Compositor_p3v23")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(-0.753311, 0.26987445, -0.5997419, -0.6576645, -0.30912328, 0.6869645, 0, 0.91192687, 0.4103528, 0, 64.24261, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(100.231, 0, 0, 0, 7.505, 0, 0, 0, 76.648, 0, 0, 0)
-mesh = SubResource("BoxMesh_5s8la")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_fr6qw")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(7.863534, -0.80589134, 0.6380023, 10.774769, 0.59067976, 0.1724091, -0.67449737, 0.04045461, 10.192212, 7.222986, 5.0754642, 0)
-mesh = SubResource("BoxMesh_5s8la")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_oiqhk")
+sky_mode = 1
 
 [node name="player" parent="." instance=ExtResource("1_jl26d")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 17.064352, 0)
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 102.064354, 0)
+max_wall_angle = 80.0
+
+[node name="TestTower" parent="." instance=ExtResource("2_5s8la")]
+visible = false
+
+[node name="TestSewer" parent="." instance=ExtResource("3_fr6qw")]
+transform = Transform3D(22.59, 0, 0, 0, 22.59, 0, 0, 0, 22.59, 0, 0, 0)
+visible = false

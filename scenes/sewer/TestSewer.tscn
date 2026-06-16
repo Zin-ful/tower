@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpeocd8rfiow5"]
+
+[ext_resource type="ArrayMesh" uid="uid://dhfka8r1scwua" path="res://models/sewer/pipe.obj" id="1_43712"]
+
+[node name="TestSewer" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_43712")

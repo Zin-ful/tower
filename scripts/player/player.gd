@@ -76,7 +76,7 @@ func _input(event):
 		rotation_x = clamp(rotation_x - event.relative.y * mouse_sensitivity, -90, 90)
 		$Head.rotation.x = deg_to_rad(rotation_x)
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("move_pause"):
 		mouse_captured = !mouse_captured
 		var mode = Input.MOUSE_MODE_CAPTURED if mouse_captured else Input.MOUSE_MODE_VISIBLE
@@ -174,12 +174,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 func update_stamina_and_timers(delta):
-	# Stamina regeneration
 	if not Input.is_action_pressed("move_sprint"):
 		stamina += stamina_build_passive * delta
 		stamina = min(stamina, stamina_max)
 	
-	# Invincibility timer
 	if is_invincible:
 		invincibility_timer -= delta
 		if invincibility_timer <= 0:
@@ -220,7 +218,7 @@ func handle_move(delta: float, grounded: bool):
 		velocity.x *= damp
 		velocity.z *= damp
 
-func handle_jump_buffer(delta: float, grounded: bool):
+func handle_jump_buffer(_delta: float, grounded: bool):
 	if Input.is_action_just_pressed("move_jump") and last_jump_time > jump_cooldown:
 		print("Jump pressed!")
 		if is_sliding and jumps > 0:
@@ -328,7 +326,7 @@ func update_wall_status():
 		wall_normal = Vector3.ZERO
 		wall_stick_timer = 0.0
 
-func take_damage(damage: float, attacker: Node = null) -> float:
+func take_damage(damage: float, _attacker: Node = null) -> float:
 	if is_invincible or health <= 0:
 		return 0.0
 	
