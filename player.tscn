@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk2r4u7mfbf1b"]
+
+[sub_resource type="GDScript" id="GDScript_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4gf2a"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7r32s"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[node name="player" type="CharacterBody3D"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
+script = SubResource("GDScript_sh265")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44442, -0.0576912)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(0.333333, 0, -1.77636e-15, 0, 0.333333, 0, 1.77636e-15, 0, 0.333333, 2.86787e-10, 0.00264922, 0.00656464)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00757465, 0, 0.999971, 0, 1, 0, -0.999971, 0, -0.00757465, 0.0097437, -0.284527, -0.0227154)
+mesh = SubResource("CapsuleMesh_4gf2a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.243825, 0)
+shape = SubResource("ConvexPolygonShape3D_7r32s")
+
+[node name="GNDRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.01, 0)
+
+[node name="WallCast" type="RayCast3D" parent="."]
+
+[node name="FrontRayUp" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(1, 0, 0, 0, -0.64427, 0.764798, 0, -0.764798, -0.64427, 0, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="FrontRay" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(1, 0, 0, 0, 0.526095, -0.850426, 0, 0.850426, 0.526095, 0, 0, 0)
+target_position = Vector3(0, 0, 1.1)
+
+[node name="BackRayUp" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(1, 0, 0, 0, -0.69809, -0.71601, 0, 0.71601, -0.69809, 0, 0, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="BackRay" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(1, 0, 0, 0, 0.560075, 0.828442, 0, -0.828442, 0.560075, 0, 0, 0)
+target_position = Vector3(0, 0, -1.1)
+
+[node name="LeftRayUp" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(-0.6764, -0.736534, 0, 0.736534, -0.6764, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(1, 0, 0)
+
+[node name="LeftRay" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(0.513571, 0.858047, 0, -0.858047, 0.513571, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(1.1, 0, 0)
+
+[node name="RightRayUp" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(-0.606294, 0.795241, 0, -0.795241, -0.606294, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="RightRay" type="RayCast3D" parent="WallCast"]
+transform = Transform3D(0.584264, -0.811564, 0, 0.811564, 0.584264, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(-1.1, 0, 0)
