@@ -326,7 +326,7 @@ func update_wall_status():
 		wall_normal = Vector3.ZERO
 		wall_stick_timer = 0.0
 
-func take_damage(damage: float, _attacker: Node = null) -> float:
+func take_damage(damage: float) -> float:
 	if is_invincible or health <= 0:
 		return 0.0
 	
@@ -335,7 +335,6 @@ func take_damage(damage: float, _attacker: Node = null) -> float:
 		
 	is_invincible = true
 	invincibility_timer = invincibility_duration
-	
 	flash_screen_red()
 	
 	if health <= 0:
@@ -355,3 +354,6 @@ func respawn_player():
 	health = health_max
 	print("Player respawned!")
 	global_position = Vector3(-464, 1, 0)
+
+func is_player():
+	return 1

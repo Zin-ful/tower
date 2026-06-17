@@ -1,0 +1,190 @@
+[gd_scene load_steps=11 format=3 uid="uid://0th78gr2ndhk"]
+
+[ext_resource type="Script" uid="uid://cyinpwxt66sim" path="res://scripts/traps/test_trap.gd" id="1_hd05w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wtm3v"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b6qpv"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hd05w"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hd05w"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wtm3v"]
+points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="Animation" id="Animation_hd05w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spikes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 1.3974332)
+
+[sub_resource type="Animation" id="Animation_b6qpv"]
+resource_name = "Retract"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 1.4073806, 0.5, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_wtm3v"]
+resource_name = "Spring"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.4073806)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bqen"]
+_data = {
+&"RESET": SubResource("Animation_hd05w"),
+&"Retract": SubResource("Animation_b6qpv"),
+&"Spring": SubResource("Animation_wtm3v")
+}
+
+[node name="TestTrap" type="Node3D"]
+script = ExtResource("1_hd05w")
+
+[node name="PlacementMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.25865698, 0, 0, -0.3614207)
+mesh = SubResource("BoxMesh_wtm3v")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.3069832, 0, 0, 0.8812996)
+shape = SubResource("ConvexPolygonShape3D_b6qpv")
+
+[node name="Spikes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3974332)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.25865698, 0, 0, -0.24544948)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_hd05w")
+
+[node name="DamageArea" type="Area3D" parent="Spikes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.7933437)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/DamageArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.7828281, 0, 0, 0.6372753)
+shape = SubResource("ConvexPolygonShape3D_b6qpv")
+
+[node name="Spike" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0, 0, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike2" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, -0.40447292, 0, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike2/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike3" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0.35575414, 0, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike3/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike4" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0, 0.3582517, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike4/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike8" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0.44330418, 0.3582517, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike8/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike9" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, -0.39944524, 0.3582517, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike9/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike5" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0, -0.38974935, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike5/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike6" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, 0.30564964, -0.34899724, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike6/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="Spike7" type="MeshInstance3D" parent="Spikes"]
+transform = Transform3D(0.05070194, 0, 0, 0, 0.033549085, -0.057815075, 0, 1.7053899, 0.0011373603, -0.38687515, -0.4006254, -0.9927099)
+mesh = SubResource("PrismMesh_hd05w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Spikes/Spike7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes/Spike7/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_wtm3v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1bqen")
+}
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_detect_player"]
+[connection signal="body_entered" from="Spikes/DamageArea" to="." method="_detect_hitbox"]
