@@ -62,7 +62,7 @@ Textures:
 		Intersections
 		Curves
 		Loops
-        Combination Pipes (The combination of the above)	
+		Combination Pipes (The combination of the above)	
 	Tower:
 		Different sections with rooms, some with openings, windows, ledges (int/ext), and
 		some that are fractured with floating pieces
