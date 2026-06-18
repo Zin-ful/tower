@@ -1,39 +1,36 @@
 extends CharacterBody3D
 
-@export var health := 100.0
-@export var stamina := 100.0
-@export var health_max := 100.0
-@export var stamina_max := 100.0
-@export var stamina_build_passive := 40.0
-@export var stamina_drain_sprint := 2.0
-@export var stamina_drain_sidestep := 3.0
-@export var stamina_drain_jump := 1.0
+@export var health := 100.0 ##Player starting health
+@export var health_max := 100.0 ##The maximum health that the player can heal to
+@export var invincibility_duration := 0.5 ##Duration in seconds of invulnerability after being hit
+@export var stamina := 100.0 ##Player starting stamina
+@export var stamina_max := 100.0 ##Maximum stamina that can be regenerated
+@export var stamina_build_passive := 40.0 ##Amount of stamina build passively * delta
+@export var stamina_drain_sprint := 2.0 ##Stamina drain from sprinting * delta
+@export var stamina_drain_jump := 1.0 ##Stamina drain from jumping 
 
-@export var invincibility_duration := 0.5
+
 var is_invincible := false
 var invincibility_timer := 0.0
 
-@export var max_speed := 30.0
+@export var max_speed := 30.0 ##Max speed with no modifiers or sprint
 @onready var cache_max_speed := max_speed
-var sprint_speed := 1.0
-@export var accel := 700.0
-@export var decel := 0.3
-@export var air_speed := 1.5
-@export var fall_speed := 5.0
-
-@export var jump_cooldown := 0.2
-
-@export var gravity := 50.0
-@export var jump_speed := 50.0
+@export var air_speed := 1.5 ##The amount of control while in air
+@export var fall_speed := 5.0 ##The speed at which the player decends while holding ctrl
+@export var accel := 700.0 ##Acceleration from stop
+@export var decel := 0.3 ##Decceleration from current velocity
+@export var gravity := 50.0 ##You know what this means
+@export var jump_speed := 50.0 ##Speed at which the player departs from surface
+@export var jump_max := 3 ##Amount of jumps avaliable
+@export var jump_cooldown := 0.2 ##Length in seconds between presses to prevent spamming
 @export var jump_max_held := 0.2
-@export var wall_jump_force := 140.0
-@export var wall_jump_force_init := 125.0
-@export var jump_max := 3
+@export var wall_jump_force := 140.0 ##Speed of a jump when departing from a wall
+@export var wall_jump_force_init := 125.0 ##The initial speed burst when performing a wall jump
 @export var coyote_time := 0.2
-@export var jump_buffer := 0.5
 @export var mouse_sensitivity := 0.1
 @export var wall_angle := 5.0
 @export var max_wall_angle := 150.0
+@export var straight_wall_leeway = 3
 @export var wall_jump_velocity_preserve_time := 0.1
 @export var wall_jump_velocity_max := 160
 
@@ -48,6 +45,7 @@ var sprint_speed := 1.0
 var in_water = false
 var slow = 2
 
+var sprint_speed := 1.0
 var cache_jump := jump_speed
 var cache_accel := accel
 
@@ -298,7 +296,8 @@ func update_wall_status():
 		if ray.is_colliding():
 			var normal = ray.get_collision_normal()
 			var angle_deg = rad_to_deg(acos(normal.dot(Vector3.UP)))
-			
+			if angle_deg > (90 - straight_wall_leeway) and angle_deg < (90 + straight_wall_leeway):
+				return
 			if angle_deg > wall_angle and angle_deg < max_wall_angle:
 				var to_wall = -normal.normalized()
 				var toward_wall = has_input and input_dir.dot(to_wall) > 0.1

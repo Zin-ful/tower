@@ -13,5 +13,4 @@ func _player_entered_one(body: Node3D) -> void:
 func _player_entered_two(body: Node3D) -> void:
 	if body.has_method("is_player") and not two_trigged:
 		animation_player.play("lower_2")
-		remove_child(detect_two)
 		two_trigged = 1
