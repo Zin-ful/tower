@@ -1,0 +1,71 @@
+Notes:
+	Any entry with a "!" is a bug.
+
+Priority:
+	See: 3D Models
+	See: Textures
+	See: Behavior
+
+Bugs:
+	See: Behavior
+
+UI:
+	Add main menu
+	Add health bar, stamina bar
+	Flash screen during loss of health
+	Add timer (best time)
+
+Behavior:
+	!Player tilts improperly likely do to the top raycasts not being mirrored
+
+	
+Performance:
+	Adjust shadows to compensate for new visuals
+	Test on:
+		Lenovo X11e
+		Getac V110 G6
+		PC with GTX 960
+
+Function:
+	Prototype:
+		Traps:
+			Spikes
+			Turbine
+			Lazers
+		Level Generation:
+			Sockets for part attachment
+			Animations for new areas loading
+		VFX for various interations during movement
+		Unloading child scenes once the player has complete enough ahead of them
+		Check points
+	Load scenes dynamically from menus
+	Add player spawn point for respawn
+
+Lighting:
+	Balance ambient lighting to illuminate platforms or traps
+	Test different lighting per zone
+	Find less expensive ways to light areas
+
+Textures:
+	Tower Parts:
+		Textures for Brick and wood
+	Sewer parts:
+		Textures for sewer walls, water, and platforms
+		Texture for dead ends (if any) similar to a grate or metal mesh
+
+
+3D Models:
+	Sewer Pipe Types:
+		90s
+		45s
+		Tees
+		Intersections
+		Curves
+		Loops
+        Combination Pipes (The combination of the above)	
+	Tower:
+		Different sections with rooms, some with openings, windows, ledges (int/ext), and
+		some that are fractured with floating pieces
+	
+	General:
+		Models for different, rustic types of light fixtures
