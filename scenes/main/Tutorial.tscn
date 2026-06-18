@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://duce7pumqt6v3"]
 
-[ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://player.tscn" id="1_jl26d"]
-[ext_resource type="PackedScene" uid="uid://b5txbjxbfhejj" path="res://scenes/tower/TestTower.tscn" id="2_5s8la"]
-[ext_resource type="PackedScene" uid="uid://bpeocd8rfiow5" path="res://scenes/sewer/TestSewer.tscn" id="3_fr6qw"]
+[ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://scenes/player/player.tscn" id="1_ov3wj"]
+[ext_resource type="PackedScene" uid="uid://b5txbjxbfhejj" path="res://scenes/tower/TestTower.tscn" id="2_4toud"]
+[ext_resource type="PackedScene" uid="uid://bpeocd8rfiow5" path="res://scenes/sewer/TestSewer.tscn" id="3_1lbuk"]
 
 [sub_resource type="Environment" id="Environment_fr6qw"]
 background_mode = 1
@@ -24,12 +24,12 @@ transform = Transform3D(-0.753311, 0.26987445, -0.5997419, -0.6576645, -0.309123
 directional_shadow_mode = 0
 sky_mode = 1
 
-[node name="player" parent="." instance=ExtResource("1_jl26d")]
+[node name="player" parent="." instance=ExtResource("1_ov3wj")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25.006317, 40.91806, -7.144333)
 max_wall_angle = 170.0
 
-[node name="TestTower" parent="." instance=ExtResource("2_5s8la")]
+[node name="TestTower" parent="." instance=ExtResource("2_4toud")]
 transform = Transform3D(4.68, 0, 0, 0, 4.68, 0, 0, 0, 4.68, 0.802742, 1.0640411, 2.825325)
 
-[node name="TestSewer" parent="." instance=ExtResource("3_fr6qw")]
+[node name="TestSewer" parent="." instance=ExtResource("3_1lbuk")]
 transform = Transform3D(-0.013096204, -9.744991, 0, 9.744991, -0.013096204, 0, 0, 0, 9.745, -4.736267, 1346.6096, 0)

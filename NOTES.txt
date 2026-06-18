@@ -1,0 +1,63 @@
+## IMPORTANT ##
+After extruding the single vertex and converting to curve, 
+once you convert to mesh you CANNOT convert back. If you 
+decide to convert back you can no longer edit depth or resolution.
+
+Anything marked with a ? is unknown
+
+Because we are working with single layer objects, size no longer matters
+or effects how it looks when resized in game.
+
+For unknown variables, please notate the when an object is first created 
+and once correct abide by that standard.
+
+When using the ruler tool, use CTRL + Left Click to snap to an objects surface.
+Practice first so you understand how it works.
+
+## Object and Project Settings ##
+
+Viewport Overlays:
+	Geometry:
+		Face Orientation: True
+
+Viewport Shading:
+	Backface Culling: True (can disable if not needed)
+
+Object Properties:
+	Scale: 1.0
+	Location 0.0
+	Rotation: 0.0
+	
+Modifiers:
+	Solidify:
+		Mode: Simple
+		Thickness: 0.001
+		Offset: -1.0
+		Rim: Fill = True
+
+Data (Curve mode only):
+	Resolution: 18
+	Depth: ?
+
+Measurements (Not tracked by blender, ruler tool):
+	Length: 4 Meters
+	Inner Diameter: 0.75 Meters
+	Flare width (inside rim to outside): 0.14 Meters
+
+## NOTES ##
+	Pipes should be long enough to accomodate for player speed
+	
+	Flared ends should be measured and notated to a standard size
+	
+	To find the length of your flared end, before finalizing the length of extrusion will be noted at 
+		the top of the screen as such:
+			D: 0.0000 m (0.000 0m normale)
+		M as in meters
+	
+	Pipe lengths should be measured and notated to a standard length to keep total
+		length consistent between objects. Use CTRL + Left Click with the ruler tool.
+		
+		In edit/object mode the measure tool is avaliable as a square with an angle in the 
+		corner on the left side of the screen
+	
+	
