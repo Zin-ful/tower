@@ -14,6 +14,21 @@ and once correct abide by that standard.
 When using the ruler tool, use CTRL + Left Click to snap to an objects surface.
 Practice first so you understand how it works.
 
+## Measurements ##
+
+Measurements (Not tracked by blender, use ruler tool):
+	NOTE: Add new entries as needed, add custom fields as needed
+
+    STANDADRS:
+        Length: Multiples of 4
+        Pipe Resolution: 12
+        Inner Diameter: 0.75 Depth OR 1.5 Inner Diameter (equal when measured)
+        Angles: 1 Meter Offset @90° scaled to angle (45° == 0.5m Offset)
+        Circle Cuts: See Flare Depth
+        Flare Width: 0.15 Meters
+        Flare Depth: 0.26 Meters
+
+
 ## Object and Project Settings ##
 
 Viewport Overlays:
@@ -38,57 +53,6 @@ Modifiers:
 Data (Curve mode only):
 	Resolution: 12
 	Depth: 0.75
-
-Measurements (Not tracked by blender, ruler tool):
-e	NOTE: Add new entries as needed, add custom fields as needed
-
-	Straight Pipe Ver 1:
-		Length: 4 Meters
-		Inner Diameter: 0.75 Meters
-		Flare width (inside rim to outside): 0.14 Meters
-
-	90 Deg Pipe (right):
-		Length: 4 Meters
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-        Offset: 0.5 Meters
-        Segments: 4
-        Profile Shape: 0.5
-
-	-90 Deg Pipe (left):
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	45 Deg (right):
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	-45 Deg (left):
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	?:
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	?:
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	?:
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
-
-	?:
-		Length: ?
-		Inner Diameter: ?
-		Flare width (inside rim to outside): ?
 
 ## NOTES ##
 	Pipes should be long enough to accomodate for player speed
