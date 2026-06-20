@@ -1,0 +1,196 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmht6ifw6ygo"]
+
+[ext_resource type="Script" uid="uid://dsjqdq4snij5h" path="res://scripts/traps/!GenericTrap.gd" id="1_ats87"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ie17p"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie17p"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 9.27
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q6cky"]
+material = SubResource("StandardMaterial3D_ie17p")
+
+[node name="Trap" type="Node3D"]
+script = ExtResource("1_ats87")
+
+[node name="Lazer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -127.680756, 0, 0)
+
+[node name="DetectionArea" type="Area3D" parent="Lazer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.238556, 0, 0)
+
+[node name="DetectionZone" type="CollisionShape3D" parent="Lazer/DetectionArea"]
+transform = Transform3D(1.898, 0, 0, 0, 57.135, 0, 0, 0, 57.135, 348.35788, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ie17p")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="DamageArea" type="Area3D" parent="Lazer"]
+
+[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea"]
+transform = Transform3D(11.705928, 0, 0, 0, 57.13498, 0, 0, 0, 6.073766, -24.444763, 0, 13.06857)
+shape = SubResource("ConvexPolygonShape3D_ie17p")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="DamageArea2" type="Area3D" parent="Lazer"]
+
+[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea2"]
+transform = Transform3D(9.884257, 0, 0, 0, 57.134956, 0, 0, 0, 7.330183, -24.444763, 0, -26.57482)
+shape = SubResource("ConvexPolygonShape3D_ie17p")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="DamageArea3" type="Area3D" parent="Lazer"]
+
+[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea3"]
+transform = Transform3D(9.884257, 0, 0, 0, 57.134937, 0, 0, 0, 6.536695, -24.444763, 0, -4.9978633)
+shape = SubResource("ConvexPolygonShape3D_ie17p")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="DamageArea4" type="Area3D" parent="Lazer"]
+
+[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea4"]
+transform = Transform3D(9.884257, 0, 0, 0, 57.13494, 0, 0, 0, 3.573636, -24.444763, 0, 27.528143)
+shape = SubResource("ConvexPolygonShape3D_ie17p")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="Construction" type="Node3D" parent="Lazer"]
+
+[node name="Beams" type="Node3D" parent="Lazer/Construction"]
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 9.999999)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 10.999999)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 11.999999)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 12.999999)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 13.999999)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.51744, 0, 15.00695)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 16.006948)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 26.006948)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 27.006948)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D29" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 28.006948)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D30" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, 29.006948)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D31" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.51744, 0, -30.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D32" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -29.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D33" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -28.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D34" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -27.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D35" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -26.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D36" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -25.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D37" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -24.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D38" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -23.076178)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D53" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.517, 0, -8.069)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D54" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.517, 0, -7.069)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D55" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.517, 0, -6.069)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D56" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.517, 0, -5.069)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D57" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.517, 0, -4.069)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D58" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -3.069229)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D59" type="MeshInstance3D" parent="Lazer/Construction/Beams"]
+transform = Transform3D(0.2, 0, 0, 0, 31.314999, 0, 0, 0, 0.19999999, -23.516998, 0, -2.069229)
+mesh = SubResource("CylinderMesh_q6cky")
+skeleton = NodePath("../../..")
+
+[connection signal="body_entered" from="Lazer/DetectionArea" to="." method="_detect_player"]
+[connection signal="body_entered" from="Lazer/DamageArea" to="." method="_detect_hitbox"]
+[connection signal="body_entered" from="Lazer/DamageArea2" to="." method="_detect_hitbox"]
+[connection signal="body_entered" from="Lazer/DamageArea3" to="." method="_detect_hitbox"]
+[connection signal="body_entered" from="Lazer/DamageArea4" to="." method="_detect_hitbox"]

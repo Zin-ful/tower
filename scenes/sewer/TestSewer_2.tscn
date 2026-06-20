@@ -1,42 +1,115 @@
 [gd_scene load_steps=22 format=4 uid="uid://caxqswj3j4ip4"]
 
 [ext_resource type="Script" uid="uid://cm3foyv2wstfo" path="res://scripts/levels/test_sewer.gd" id="1_ie17p"]
-[ext_resource type="Script" uid="uid://cgao34faym65d" path="res://scripts/traps/TrapLazer.gd" id="2_q6cky"]
+[ext_resource type="PackedScene" uid="uid://c01d2niipt7t2" path="res://scenes/traps/Lazer_1.tscn" id="2_fj1rn"]
+[ext_resource type="PackedScene" uid="uid://dmoon58nvbnf7" path="res://scenes/traps/Lazer_2.tscn" id="3_fj1rn"]
+[ext_resource type="PackedScene" uid="uid://cmht6ifw6ygo" path="res://scenes/traps/Lazer_3.tscn" id="4_c0ags"]
+[ext_resource type="PackedScene" uid="uid://d4h8dxkissbru" path="res://scenes/traps/Lazer_4.tscn" id="5_mskmf"]
 
 [sub_resource type="Animation" id="Animation_q6cky"]
 resource_name = "Approach"
-length = 2.0
+length = 3.0
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../..")
+tracks/0/path = NodePath("Trap")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -127.680756, 0, 0, 0.2, 1, -127.680756, 0, 0, 1.6, 1, 123.24774, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.3, 1, 0, 0, 0, 3, 1, 495.5282, 0, 0)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../..")
+tracks/1/path = NodePath("Trap")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.20172349, 1, 0, 0, 0, 1, 0.96666664, 1, 0.6090729, 0, 0, 0.7931142, 1.6, 1, 0.97909164, 0, 0, 0.20341958)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.31, 1, 0, 0, 0, 1, 1.1666666, 1, 0.9991243, 0, 0, -0.041840743, 1.8666667, 1, 0.57486945, 0, 0, 0.8182451, 3, 1, -0.38741925, 0, 0, 0.92190367)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trap2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 3, 1, 482.93887, 0, 0)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trap2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.1333333, 1, -0.6218588, 0, 0, 0.7831294, 2.0666666, 1, 0.98721427, 0, 0, -0.15939875, 3, 1, 0.69683343, 0, 0, 0.717233)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trap3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 3, 1, 489.52155, 0, 0)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trap3")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.1, 1, 0.9054392, 0, 0, -0.42447597, 2.0666666, 1, 0.97749877, 0, 0, 0.21094099, 3, 1, 0.24166782, 0, 0, 0.970359)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trap4")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0, 3, 1, 490.21008, 0, 0)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trap4")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.1333333, 1, 0.8699472, 0, 0, -0.4931449, 2.0666666, 1, 0.8986103, 0, 0, 0.43874767, 3, 1, 0.08017281, 0, 0, 0.996781)
 
 [sub_resource type="Animation" id="Animation_fj1rn"]
 length = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../..")
+tracks/0/path = NodePath("Trap")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -127.680756, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../..")
+tracks/1/path = NodePath("Trap")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trap2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Trap2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trap3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trap4")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fj1rn"]
 _data = {
@@ -114,22 +187,12 @@ material = SubResource("StandardMaterial3D_7qd5s")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tspfc"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ie17p"]
-points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie17p"]
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 9.27
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_q6cky"]
-material = SubResource("StandardMaterial3D_ie17p")
-
 [node name="TestSewer" type="Node3D"]
 script = ExtResource("1_ie17p")
+randomize_traps = true
+traps = Array[NodePath]([NodePath("Trap"), NodePath("Trap2"), NodePath("Trap3"), NodePath("Trap4")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Lazer/DetectionArea/DetectionZone")
 libraries = {
 &"": SubResource("AnimationLibrary_fj1rn")
 }
@@ -201,278 +264,27 @@ light_bake_mode = 1
 spot_range = 50.0
 spot_attenuation = 0.43
 
-[node name="Lazer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.680756, 0, 0)
-script = ExtResource("2_q6cky")
+[node name="Trap" parent="." instance=ExtResource("2_fj1rn")]
+action_animation_name = "Approach"
+hide_mesh_until_trigger = true
+turn_off_lights = true
 
-[node name="DetectionArea" type="Area3D" parent="Lazer"]
+[node name="Trap2" parent="." instance=ExtResource("3_fj1rn")]
+action_animation_name = "Approach"
+hide_mesh_until_trigger = true
+turn_off_lights = true
 
-[node name="DetectionZone" type="CollisionShape3D" parent="Lazer/DetectionArea"]
-transform = Transform3D(1.898, 0, 0, 0, 57.135, 0, 0, 0, 57.135, 190.609, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ie17p")
+[node name="Trap3" parent="." instance=ExtResource("4_c0ags")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+action_animation_name = "Approach"
+hide_mesh_until_trigger = true
+turn_off_lights = true
 
-[node name="DamageArea" type="Area3D" parent="Lazer"]
-
-[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea"]
-transform = Transform3D(1.898, 0, 0, 0, 57.135, 0, 0, 0, 30.914303, -24.444763, 0, 11.922028)
-shape = SubResource("ConvexPolygonShape3D_ie17p")
-
-[node name="DamageArea2" type="Area3D" parent="Lazer"]
-
-[node name="DamageZone" type="CollisionShape3D" parent="Lazer/DamageArea2"]
-transform = Transform3D(1.898, 0, 0, 0, 57.135, 0, 0, 0, 15.356925, -24.444763, 0, -23.39315)
-shape = SubResource("ConvexPolygonShape3D_ie17p")
-
-[node name="Beams" type="Node3D" parent="Lazer"]
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.51744, 0, 0)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 1)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 2)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 3)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 4)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 5)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 6)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 7)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 8)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 9)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 10)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 11)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D13" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 12)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D14" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 13)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D15" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 14)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D16" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.51744, 0, 15.006951)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D17" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 16.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D18" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 17.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D19" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 18.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D20" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 19.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D21" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 20.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D22" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 21.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D23" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 22.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D24" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 23.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D25" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 24.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D26" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 25.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D27" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 26.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D28" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 27.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D29" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 28.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D30" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, 29.00695)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D31" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.51744, 0, -30.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D32" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -29.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D33" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -28.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D34" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -27.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D35" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -26.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D36" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -25.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D37" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -24.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D38" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -23.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D39" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -22.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D40" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -21.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D41" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -20.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D42" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -19.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D43" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -18.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D44" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -17.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D45" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -16.07618)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D46" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.51744, 0, -15.069228)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D58" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -3.0692291)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D59" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -2.0692291)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D60" type="MeshInstance3D" parent="Lazer/Beams"]
-transform = Transform3D(0.2, 0, 0, 0, 31.315, 0, 0, 0, 0.2, -23.516998, 0, -1.0692291)
-mesh = SubResource("CylinderMesh_q6cky")
-skeleton = NodePath("../..")
+[node name="Trap4" parent="." instance=ExtResource("5_mskmf")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+action_animation_name = "Approach"
+hide_mesh_until_trigger = true
+turn_off_lights = true
 
 [connection signal="body_entered" from="Water/Area3D" to="." method="_player_entered_water"]
 [connection signal="body_exited" from="Water/Area3D" to="." method="_player_exited_water"]
-[connection signal="body_entered" from="Lazer/DetectionArea" to="Lazer" method="_detect_player"]
-[connection signal="body_entered" from="Lazer/DamageArea" to="Lazer" method="_detect_hitbox"]
-[connection signal="body_entered" from="Lazer/DamageArea2" to="Lazer" method="_detect_hitbox"]

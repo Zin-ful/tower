@@ -23,7 +23,7 @@ camera_attributes = SubResource("CameraAttributesPractical_oiqhk")
 compositor = SubResource("Compositor_p3v23")
 
 [node name="player" parent="." instance=ExtResource("1_ov3wj")]
-transform = Transform3D(-0.6810021, 0, 0.73228145, 0, 1, 0, -0.73228145, 0, -0.6810021, 359.69043, -16.013367, -19.350632)
+transform = Transform3D(-0.6810021, 0, 0.73228145, 0, 1, 0, -0.73228145, 0, -0.6810021, -160.84216, -16.013367, -19.350632)
 max_wall_angle = 170.0
 
 [node name="TestSewer" parent="." instance=ExtResource("3_1lbuk")]

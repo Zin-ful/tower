@@ -14,6 +14,9 @@ and once correct abide by that standard.
 When using the ruler tool, use CTRL + Left Click to snap to an objects surface.
 Practice first so you understand how it works.
 
+UPDATE:
+	New specification added for scenes in redot pertaining to how traps, lights, etc should be titled and function
+
 ## Measurements ##
 
 Measurements (Not tracked by blender, use ruler tool):
@@ -87,3 +90,42 @@ Pipe Sizing:
 	
 Lights:
 	Bake mode: Static
+	
+## Scene Standards ##
+
+# - A numbered object
+
+Declarations:
+	Lights will always be underneath a Node3D object named "Lighting"
+	Traps will always exist under a Node3D named "Trap"
+	Animation Players retain their default name
+	Trap Scripts need to be attached to the root node
+
+Piece Scene Layouts:
+	Root (Node3D, name of object):
+		AnimationPlayer
+		Structure (MeshInstance3D, name):
+			StaticBody3D:
+				CollisionShape3D (Trimesh)
+			Structures Inside Structure (water, ledges, rooms, decorations, etc)
+		Lighting (Node3D)
+		Trap# (Child Scene Instance)
+
+Trap Scene Layouts:
+	Root (Node3D, named Trap):
+		Node3D (name of trap):
+			DetectionArea# (Area3D):
+				DetectionZone (CollisionShape3D, single convex)
+			DamageArea# (Area3D):
+				DamageZone (CollisionShape3D, single convex):
+			Node3D (named Construction):
+				Node3D (name of object):
+					MeshInstance3D# - NOTE: Does not need collision
+
+Level Scene Layouts:
+	Root (Node3D, name of level)
+		World Enviorment:
+			DirectionalLight3D (if outside)
+		Player (Child Scene Instance)
+		Piece (Name and/or Number, Child Scene Instance)
+	
