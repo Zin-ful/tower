@@ -32,11 +32,14 @@ func _detect_player(body: Node3D) -> void:
 		if turn_off_lights:
 			lights.visible = false
 		construction.visible = true
-		animation_player.play(action_animation_name)
-		await animation_player.animation_finished
-		lights.visible = true
-		if destroy_trap_on_end:
-			queue_free()
+		if action_animation_name:
+			animation_player.play(action_animation_name)
+			await animation_player.animation_finished
+			if destroy_trap_on_end:
+				queue_free()
+		if lights:
+			lights.visible = true
+
 
 func _detect_hitbox(body: Node3D) -> void:
 	if body.has_method("is_player"):
