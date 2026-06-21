@@ -78,11 +78,16 @@ var wall_slide_speed := 10.0
 var wall_stick_duration := 0.3
 var wall_stick_velocity_threshold := 5.0
 
+#Performance shiz
+@onready var wall_rays = $WallCast.get_children() #so we dont use get_children every loop
+@onready var gnd_ray = $GNDRayCast
+
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		rotation_x = clamp(rotation_x - event.relative.y * mouse_sensitivity, -90, 90)
-		$Head.rotation.x = deg_to_rad(rotation_x)
+		player_head.rotation.x = deg_to_rad(rotation_x)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("move_pause"):
@@ -92,13 +97,16 @@ func _unhandled_input(_event):
 
 func _ready():
 	jumps = jump_max
-	$GNDRayCast.target_position = Vector3(0, -1.1, 0)
-	$GNDRayCast.enabled = true
+	gnd_ray.target_position = Vector3(0, -1.1, 0)
+	gnd_ray.enabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
 	if camera:
 		camera.fov = base_fov
-
+var cos_wall_angle_min := cos(deg_to_rad(wall_angle))
+var cos_wall_angle_max := cos(deg_to_rad(max_wall_angle))
+var cos_straight_min := cos(deg_to_rad(90 - straight_wall_leeway))
+var cos_straight_max := cos(deg_to_rad(90 + straight_wall_leeway))
 func _process(delta):
 	update_camera_fov(delta)
 	update_stamina_and_timers(delta)
@@ -120,21 +128,22 @@ func _physics_process(delta):
 	else:
 		max_speed = cache_max_speed
 	
+	var input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	direction = (transform.basis * Vector3(input.x, 0, input.y)).normalized()
+	
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 		is_sliding = false
 	else:
-		update_wall_status()
+		update_wall_status(direction)
 	
-	var input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	direction = (transform.basis * Vector3(input.x, 0, input.y)).normalized()
+	
 	
 	if is_sliding and wall_normal != Vector3.ZERO:
 		var right_vector = transform.basis.x.normalized()
-		var tilt_direction = wall_normal.cross(Vector3.UP).normalized()
 		
 		var tilt_amount_target = 0.0
-		if right_vector.dot(tilt_direction) > 0:
+		if right_vector.dot(wall_normal) > 0:
 			tilt_amount_target = -0.3
 		else:
 			tilt_amount_target = 0.3
@@ -143,7 +152,7 @@ func _physics_process(delta):
 	else:
 		rotation.z = lerp(rotation.z, 0.0, 5 * delta)
 	
-	var grounded = is_on_floor() or $GNDRayCast.is_colliding()
+	var grounded = is_on_floor() or gnd_ray.is_colliding()
 	
 	if grounded:
 		last_gnd_time = 0.0
@@ -228,15 +237,11 @@ func handle_move(delta: float, grounded: bool):
 
 func handle_jump_buffer(_delta: float, grounded: bool):
 	if Input.is_action_just_pressed("move_jump") and last_jump_time > jump_cooldown:
-		print("Jump pressed!")
 		if is_sliding and jumps > 0:
-			print("Trying wall jump!")
 			do_wall_jump()
 		elif jumps > 0 and grounded:
-			print("Doing ground jump")
 			do_jump(Vector3.UP)
 		elif jumps > 0:
-			print("Doing midair jump")
 			do_jump(Vector3.UP)
 
 func do_jump(direction: Vector3):
@@ -281,27 +286,28 @@ func do_wall_jump():
 	wall_jump_velocity_preserve_timer = wall_jump_velocity_preserve_time
 	wall_jump_boost_timer += wall_jump_boost_duration
 
-	print("WALL JUMP - velocity clamped to:", velocity.length(), "max allowed:", max_wall_jump_speed)
-
-func update_wall_status():
-	
+func update_wall_status(input_dir):
+	if is_on_floor():
+		is_sliding = false
+		wall_normal = Vector3.ZERO
+		wall_stick_timer = 0.0
+		return
+		
 	var input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var input_dir = (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 	var has_input = input.length() > 0.001
 	
 	var found_wall = false
 	var new_wall_normal = Vector3.ZERO
 	
-	for ray in $WallCast.get_children():
+	for ray in wall_rays:
 		if ray.is_colliding():
 			var normal = ray.get_collision_normal()
-			var angle_deg = rad_to_deg(acos(normal.dot(Vector3.UP)))
-			if angle_deg > (90 - straight_wall_leeway) and angle_deg < (90 + straight_wall_leeway):
-				return
-			if angle_deg > wall_angle and angle_deg < max_wall_angle:
+			var angle_deg = normal.dot(Vector3.UP)
+			if angle_deg > cos_straight_max and angle_deg < cos_straight_min:
+				continue
+			if angle_deg > cos_wall_angle_max and angle_deg < cos_wall_angle_min:
 				var to_wall = -normal.normalized()
 				var toward_wall = has_input and input_dir.dot(to_wall) > 0.1
-				
 				if toward_wall or (is_sliding and wall_normal.dot(normal) > 0.7):
 					new_wall_normal += normal
 					found_wall = true
@@ -355,13 +361,11 @@ func flash_screen_red():
 	print("Player hit! Screen should flash red")
 
 func handle_death():
-	print("Player died!")
 	await get_tree().create_timer(2.0).timeout
 	respawn_player()
 
 func respawn_player():
 	health = health_max
-	print("Player respawned!")
 	global_position = Vector3(-464, 1, 0)
 
 func is_player():

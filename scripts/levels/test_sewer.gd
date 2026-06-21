@@ -16,7 +16,10 @@ func turn_off_traps():
 func randomize_trap():
 	turn_off_traps()
 	print("Randomized traps ARE enabled, ensure this is intentional. Any trap assigned will be set to invisible.")
-	var trap = get_node(traps[randi_range(0, traps.size() - 1)])
+	var name = traps[randi_range(0, traps.size() - 1)]
+	print("Selected:")
+	print(name)
+	var trap = get_node(name)
 	if not trap:
 		printerr("Trap not found! You have an invalid path inside of your trap randomization!")
 	trap.visible = true
