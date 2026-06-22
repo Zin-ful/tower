@@ -25,6 +25,7 @@ compositor = SubResource("Compositor_p3v23")
 [node name="player" parent="." instance=ExtResource("1_ov3wj")]
 transform = Transform3D(-0.6810021, 0, 0.73228145, 0, 1, 0, -0.73228145, 0, -0.6810021, -160.84216, -16.013367, -19.350632)
 max_wall_angle = 170.0
+pixelization = 3.0
 
 [node name="TestSewer" parent="." instance=ExtResource("3_1lbuk")]
 transform = Transform3D(0.9999991, -0.0013438461, 0, 0.0013438461, 0.9999991, 0, 0, 0, 1, -65.27118, -22.666931, -42.978333)

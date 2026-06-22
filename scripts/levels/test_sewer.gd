@@ -5,17 +5,17 @@ extends Node3D
 
 func _ready():
 	if randomize_traps:
+		turn_off_traps()
 		randomize_trap()
 
 func turn_off_traps():
+	print("Randomized traps ARE enabled, ensure this is intentional. Any trap assigned will be set to invisible.")
 	for i in traps:
 		var temp = get_node(i)
 		temp.visible = false
 		
 
 func randomize_trap():
-	turn_off_traps()
-	print("Randomized traps ARE enabled, ensure this is intentional. Any trap assigned will be set to invisible.")
 	var name = traps[randi_range(0, traps.size() - 1)]
 	print("Selected:")
 	print(name)

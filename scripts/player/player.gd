@@ -8,8 +8,8 @@ extends CharacterBody3D
 @export var stamina := 100.0 ##Player starting stamina
 @export var stamina_max := 100.0 ##Maximum stamina that can be regenerated
 @export var stamina_build_passive := 40.0 ##Amount of stamina build passively * delta
-@export var stamina_drain_sprint := 2.0 ##Stamina drain from sprinting * delta
-@export var stamina_drain_jump := 1.0 ##Stamina drain from jumping 
+@export var stamina_drain_sprint := 1.0 ##Stamina drain from sprinting * delta
+@export var stamina_drain_jump := 0.5 ##Stamina drain from jumping 
 
 
 var is_invincible := false
@@ -25,28 +25,31 @@ var invincibility_timer := 0.0
 
 @export_group("Jump")
 @export var jump_max := 3 ##Amount of jumps avaliable
-@export var jump_cooldown := 0.2 ##Length in seconds between presses to prevent spamming
-@export var jump_max_held := 0.2
+@export var jump_cooldown := 0.2 ##Length in seconds between jumps to prevent spamming
+@export var jump_max_held := 0.2 ##Allows for higher jumps when pressed longer
 @export var wall_jump_force := 140.0 ##Speed of a jump when departing from a wall
 @export var wall_jump_force_init := 125.0 ##The initial speed burst when performing a wall jump
-@export var coyote_time := 0.2
-@export var mouse_sensitivity := 0.1
-@export var wall_angle := 5.0
-@export var max_wall_angle := 150.0
-@export var straight_wall_leeway = 3
-@export var wall_jump_velocity_preserve_time := 0.1
-@export var wall_jump_velocity_max := 160
+@export var mouse_sensitivity := 0.1 ##Sensitivity
+@export var wall_angle := 5.0 ##Minimum angle for walls to be jumped off of
+@export var max_wall_angle := 150.0 ##Maximum angle for walls to be jumped off of
+@export var straight_wall_leeway = 3 ##The amount of range to or from 90 degrees that is accepted as a "straight wall" or surface that cannot be jumped off of
+@export var wall_jump_velocity_preserve_time := 0.2 ##Amount of time top speed is preserved
+@export var wall_jump_velocity_max := 160 ##Maximum speed with any boost
 
 @export_group("FOV")
-@export var base_fov := 75.0
-@export var sprint_fov_boost := 5.0
-@export var wall_jump_fov_boost := 25.0
-@export var fov_lerp_speed := 8.0
+@export var base_fov := 75.0 ##Default field of view
+@export var sprint_fov_boost := 5.0 ##The amount field of view increases while sprinting
+@export var wall_jump_fov_boost := 25.0 ##The amount field of view can increase during a wall jump or max speed
+@export var fov_lerp_speed := 8.0 ##The speed at which the field of view changes
 
 @export_group("Dash")
 @export var dash_speed := 60.0
 @export var dash_duration := 0.2
 @export var dash_stamina_cost := 20.0
+
+@export_group("Shader")
+@export_range (0.0, 100.0, 0.1) var pixelization: float
+@onready var shader_mesh: MeshInstance3D = $Head/Camera3D/PixelFilter
 
 @onready var cache_max_speed := max_speed
 @onready var player_head = $Head
@@ -108,6 +111,7 @@ func _ready():
 	add_to_group("player")
 	if camera:
 		camera.fov = base_fov
+	shader_mesh.mesh.get_material().set("shader_parameter/pixel_size",pixelization)
 
 func add_speed_modifier(id: SpeedMod, multiplier: float, duration: float = -1.0) -> void:
 	_speed_modifiers[id] = {"mult": multiplier, "timer": duration}
@@ -169,6 +173,9 @@ func _physics_process(delta):
 	last_jump_time += delta
 	dash_cooldown_timer = max(dash_cooldown_timer - delta, 0.0)
 	
+	if Input.is_action_just_pressed("move_dash"):
+		do_dash()
+	
 	_update_sprint_modifier(delta)
 	_update_wall_jump_boost(delta)
 	_update_speed_modifiers(delta)
@@ -177,17 +184,12 @@ func _physics_process(delta):
 	var input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	direction = (transform.basis * Vector3(input.x, 0, input.y)).normalized()
 	
-	if Input.is_action_just_pressed("move_dash"):
-		do_dash()
-	
 	if wall_jump_timer > 0:
 		wall_jump_timer -= delta
 		is_sliding = false
 	else:
 		update_wall_status(direction)
-	
-	
-	
+
 	if is_sliding and wall_normal != Vector3.ZERO:
 		var right_vector = transform.basis.x.normalized()
 		

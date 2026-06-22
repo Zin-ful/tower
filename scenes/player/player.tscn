@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gmlin"]
 render_priority = 0
 shader = ExtResource("2_dovo2")
-shader_parameter/pixel_size = 4.0
+shader_parameter/pixel_size = 8.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_8afob"]
 material = SubResource("ShaderMaterial_gmlin")
@@ -18,6 +18,7 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [node name="player" type="CharacterBody3D"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 
 [node name="Head" type="Node3D" parent="."]
@@ -42,11 +43,16 @@ shape = SubResource("ConvexPolygonShape3D_7r32s")
 [node name="GNDRayCast" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1.01, 0)
 
-[node name="WallCast" type="RayCast3D" parent="."]
-
-[node name="FrontRayUp" type="RayCast3D" parent="WallCast"]
+[node name="FrontRayUp" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.64427, 0.764798, 0, -0.764798, -0.64427, 0, 0, 0)
+visible = false
 target_position = Vector3(0, 0, 1)
+
+[node name="FrontRay" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 7.43466e-08, 4.5992685e-08, 0, 0.5260949, -0.850426, -8.742277e-08, -0.850426, -0.5260949, 0, 0, 0)
+target_position = Vector3(0, 0, 1.1)
+
+[node name="WallCast" type="RayCast3D" parent="."]
 
 [node name="BackRayUp" type="RayCast3D" parent="WallCast"]
 transform = Transform3D(1, 0, 0, 0, -0.69809, -0.71601, 0, 0.71601, -0.69809, 0, 0, 0)
@@ -60,18 +66,14 @@ target_position = Vector3(1, 0, 0)
 transform = Transform3D(-0.606294, 0.795241, 0, -0.795241, -0.606294, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(-1, 0, 0)
 
-[node name="FrontRay" type="RayCast3D" parent="WallCast"]
-transform = Transform3D(-1, 7.43466e-08, 4.599268e-08, 0, 0.5260949, -0.850426, -8.742278e-08, -0.850426, -0.5260949, 0, 0, 0)
-target_position = Vector3(0, 0, 1.1)
-
 [node name="BackRay" type="RayCast3D" parent="WallCast"]
-transform = Transform3D(-1, -7.24247e-08, 4.89633e-08, 0, 0.56007487, 0.828442, -8.742278e-08, 0.828442, -0.56007487, 0, 0, 0)
+transform = Transform3D(-1.25, -1.2509126e-07, 8.456895e-08, 0, 0.56007487, 0.828442, -1.8874475e-07, 0.828442, -0.56007487, 0, 0, 0)
 target_position = Vector3(0, 0, -1.1)
 
 [node name="LeftRay" type="RayCast3D" parent="WallCast"]
-transform = Transform3D(-0.513571, -0.858047, 8.742278e-08, -0.858047, 0.513571, -6.299288e-10, -4.4357297e-08, -7.533636e-08, -1, 0, 0, 0)
+transform = Transform3D(-0.6162853, -0.85804707, 1.509958e-07, -1.0296565, 0.5135711, -6.299288e-10, -9.240789e-08, -1.2988501e-07, -1, 0, 0, 0)
 target_position = Vector3(1.1, 0, 0)
 
 [node name="RightRay" type="RayCast3D" parent="WallCast"]
-transform = Transform3D(-0.584264, 0.81156397, 8.742278e-08, 0.81156397, 0.584264, -3.023311e-09, -5.3531593e-08, 6.918277e-08, -1, 0, 0, 0)
+transform = Transform3D(-0.7011167, 0.8115638, 1.509958e-07, 0.9738766, 0.58426386, -3.023311e-09, -1.08810006e-07, 1.2077632e-07, -1, 0, 0, 0)
 target_position = Vector3(-1.1, 0, 0)
