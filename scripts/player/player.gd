@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export_group("Health")
 @export var health := 100.0 ##Player starting health
 @export var health_max := 100.0 ##The maximum health that the player can heal to
+@export var regen := 0.1 ##Amount of health regenerated per delta
 @export var invincibility_duration := 0.5 ##Duration in seconds of invulnerability after being hit
 
 @export_group("Stamina")
@@ -64,7 +65,7 @@ var invincibility_timer := 0.0
 @onready var player_head = $Head
 @onready var camera = $Head/Camera
 
-enum SpeedMod {SPRINT, WALL_JUMP_BOOST, DASH}
+enum SpeedMod {SPRINT, WALL_JUMP_BOOST, DASH, BOOST}
 var _speed_modifiers: Dictionary = {}
 
 var dashes = 1
@@ -484,3 +485,7 @@ func fade_to_clear(time: float = 0.5, wait:bool = false):
 
 func get_mouse():
 	return get_viewport().get_mouse_position()
+	
+func upgrade(upgrade_name: String, amount: float):
+	var upgradables = {"Max Health": health_max, "Regeneration": regen, "Max Stamina": stamina_max, "Max Speed": max_speed, "Jump Quanitiy":jumps, "Jump Height":jump_speed, "Wall Jump Boost Duration":wall_jump_boost_duration, "Wall Jump Speed": wall_jump_force, "Wall Jump Max Speed":wall_jump_velocity_max}
+	upgradables[upgrade_name] += amount

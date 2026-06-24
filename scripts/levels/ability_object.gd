@@ -12,7 +12,9 @@ extends Node3D
 @export var purple_amount: int
 @export var yellow_amount: int
 @onready var page_mesh: MeshInstance3D = $Mesh
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+var num = 0
+signal select
+signal unselect
 
 func _ready() -> void:
 	particles.emitting = false
@@ -47,9 +49,12 @@ func start():
 func stop():
 	particles.emitting = false
 
+func set_page_value(value: int):
+	num = value
+
 func _mouse_entered(area: Area3D) -> void:
-	print("selected!")
+	emit_signal("select", num)
 
 
 func _mouse_left(area: Area3D) -> void:
-	print("unselected!")
+	emit_signal("unselect", num)

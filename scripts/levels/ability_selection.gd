@@ -10,9 +10,11 @@ var player_roation: Vector3 = Vector3(0.0, 0.0, 0.0)
 var rarity = ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
 
 func _ready():
-	print()
+	
 	ability.set_rarity(rarity[randi() % rarity.size()])
 	ability_2.set_rarity(rarity[randi() % rarity.size()])
+	ability.set_page_value(1)
+	ability_2.set_page_value(2)
 	set_physics_process(false)
 	cursor.visible = false
 	player.disable_mouse()
@@ -44,3 +46,12 @@ func _physics_process(delta: float) -> void:
 	
 	if result:
 		cursor.position = result.position
+
+
+func _on_ability_select(value: int) -> void:
+	animation_player.play("View_" + str(value))
+	await animation_player.animation_finished
+
+func _on_ability_unselect(value: int) -> void:
+	animation_player.play("Return_" + str(value))
+	await animation_player.animation_finished

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cgjyggk3k3du3"]
+[gd_scene load_steps=26 format=3 uid="uid://cgjyggk3k3du3"]
 
 [ext_resource type="Script" uid="uid://jovdog6n0wl" path="res://scripts/levels/ability_selection.gd" id="1_esj08"]
 [ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://scenes/player/player.tscn" id="1_gd18s"]
@@ -39,10 +39,86 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.7912396, 5.887005, -2.2554886)
 
+[sub_resource type="Animation" id="Animation_r6vgx"]
+resource_name = "Return_1"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.0095098615, 1.2446108, -0.7194834, 0.5, 1, -0.6019584, 0.5521555, -2.2773414)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.042782415, 0, 0, 0.9990844, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_3k01k"]
+resource_name = "Return_2"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.02664411, 1.306097, -0.7681036, 0.53333336, 1, 0.7912396, 0.5924406, -2.2554886)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017871212, 0, 0, 0.99984026, 0.5, 1, 0, 0, 0, 0.99999994)
+
+[sub_resource type="Animation" id="Animation_a30sw"]
+resource_name = "View_1"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.6019584, 0.5521555, -2.2773414, 0.5, 1, -0.0095098615, 1.2446108, -0.7194834)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0.042782415, 0, 0, 0.9990844)
+
+[sub_resource type="Animation" id="Animation_vh272"]
+resource_name = "View_2"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.7912396, 0.5924406, -2.2554886, 0.5, 1, 0.02664411, 1.306097, -0.7681036)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.99999994, 0.5, 1, 0.017871212, 0, 0, 0.99984026)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a30sw"]
 _data = {
 &"Fall": SubResource("Animation_2j44i"),
-&"RESET": SubResource("Animation_7r16b")
+&"RESET": SubResource("Animation_7r16b"),
+&"Return_1": SubResource("Animation_r6vgx"),
+&"Return_2": SubResource("Animation_3k01k"),
+&"View_1": SubResource("Animation_a30sw"),
+&"View_2": SubResource("Animation_vh272")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2j44i"]
@@ -115,7 +191,7 @@ libraries = {
 }
 
 [node name="Cursor" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53732824, 0.6615648, -1.4171417)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70123124, 0.6615648, 1.6030691)
 amount = 30
 speed_scale = 5.54
 process_material = SubResource("ParticleProcessMaterial_2j44i")
@@ -143,6 +219,7 @@ compositor = SubResource("Compositor_2j44i")
 transform = Transform3D(1, 0, 0, 0, 0.07922464, -0.9968568, 0, 0.9968568, 0.07922464, 0, 1.0392456, -2.4304466)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Backdrop"]
+transform = Transform3D(3.2044373, 0, 0, 0, 0.94452715, 7.450581e-09, 0, 0, 1.1494628, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_2j44i")
 
 [node name="Ground" type="MeshInstance3D" parent="WorldEnvironment"]
@@ -175,7 +252,12 @@ spot_angle = 24.350285
 [node name="Abilities" type="Node3D" parent="."]
 
 [node name="Ability" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(0.9697997, 0, 0.24390277, 0, 1, 0, -0.24390277, 0, 0.9697997, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6019584, 5.9669847, -2.2773414)
 
 [node name="Ability2" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(0.9489232, -0.033898454, -0.31368065, -0.00018661095, 0.9941509, -0.1079992, 0.31550694, 0.10254148, 0.9433666, 0, 0, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.999361, -0.035736725, 0, 0.035736725, 0.999361, 0.7912396, 5.887005, -2.2554886)
+
+[connection signal="select" from="Abilities/Ability" to="." method="_on_ability_select"]
+[connection signal="unselect" from="Abilities/Ability" to="." method="_on_ability_unselect"]
+[connection signal="select" from="Abilities/Ability2" to="." method="_on_ability_select"]
+[connection signal="unselect" from="Abilities/Ability2" to="." method="_on_ability_unselect"]
