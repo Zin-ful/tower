@@ -1,15 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk2r4u7mfbf1b"]
+[gd_scene load_steps=9 format=3 uid="uid://bk2r4u7mfbf1b"]
 
 [ext_resource type="Script" uid="uid://d17g4tbdc00a" path="res://scripts/player/player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://pbatm8n807ut" path="res://scenes/player/pixelator.gdshader" id="2_dovo2"]
+[ext_resource type="Shader" uid="uid://dwpy71qv53ekt" path="res://scenes/player/pixelator_canvas.gdshader" id="3_gmlin"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmlin"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvxji"]
 render_priority = 0
 shader = ExtResource("2_dovo2")
-shader_parameter/pixel_size = 8.0
+shader_parameter/pixel_size = 4.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_8afob"]
-material = SubResource("ShaderMaterial_gmlin")
+material = SubResource("ShaderMaterial_lvxji")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dovo2"]
+shader = ExtResource("3_gmlin")
+shader_parameter/pixel_size = 4.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4gf2a"]
 
@@ -25,11 +30,13 @@ pixelization = 0.1
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44442, -0.0576912)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera" type="Camera3D" parent="Head"]
 transform = Transform3D(0.333333, 0, -1.77636e-15, 0, 0.333333, 0, 1.77636e-15, 0, 0.333333, 2.86787e-10, 0.00264922, 0.00656464)
 
-[node name="PixelFilter" type="MeshInstance3D" parent="Head/Camera3D"]
+[node name="PixelFilter" type="MeshInstance3D" parent="Head/Camera"]
 transform = Transform3D(2, 0, 1.4210855e-14, 0, 2, 0, -1.4210855e-14, 0, 2, -4.0321435e-09, -0.0026492178, -0.09224848)
+visible = false
+layers = 524288
 mesh = SubResource("QuadMesh_8afob")
 skeleton = NodePath("../..")
 
@@ -48,6 +55,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PixelFilter" type="ColorRect" parent="Interface/HUD"]
+material = SubResource("ShaderMaterial_dovo2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Health" type="ProgressBar" parent="Interface/HUD"]
 layout_mode = 1
@@ -95,6 +112,7 @@ max_value = 3.0
 step = 1.0
 
 [node name="BlackScreen" type="ColorRect" parent="Interface/HUD"]
+visible = false
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0

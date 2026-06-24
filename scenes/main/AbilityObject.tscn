@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dluynpbcpkkoq"]
+[gd_scene load_steps=13 format=3 uid="uid://dluynpbcpkkoq"]
 
 [ext_resource type="Script" uid="uid://cpcoan4ucaeui" path="res://scripts/levels/ability_object.gd" id="1_8isn6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1m7g"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fngpf"]
 emission_shape_scale = Vector3(0.5, 0.5, 0.5)
@@ -18,17 +21,110 @@ emission_energy_multiplier = 1.74
 material = SubResource("StandardMaterial3D_2j44i")
 size = Vector3(0.03, 0.03, 0.03)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8isn6"]
+emission_enabled = true
+emission_energy_multiplier = 0.44
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_fngpf"]
+material = SubResource("StandardMaterial3D_8isn6")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8isn6"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_8isn6"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_arjcp"]
+resource_name = "backward"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.41913986, 0.5, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.08555603, 0, 0, 0.99633336, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_n1m7g"]
+resource_name = "forward"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, 0, 0.41913986)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0.08555603, 0, 0, 0.99633336)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_arjcp"]
+_data = {
+&"RESET": SubResource("Animation_8isn6"),
+&"backward": SubResource("Animation_arjcp"),
+&"forward": SubResource("Animation_n1m7g")
+}
 
 [node name="Ability" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_8isn6")
+white = Color(1, 1, 1, 1)
+green = Color(0.09138582, 0.75369245, 3.85046e-07, 1)
+blue = Color(0, 0.74939317, 0.75098896, 1)
+purple = Color(0.3035826, 0.00050017476, 0.8364272, 1)
+yellow = Color(0.75220925, 0.6145113, 0.0048864265, 1)
+white_amount = 2
+green_amount = 7
+blue_amount = 14
+purple_amount = 25
+yellow_amount = 45
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 15
+[node name="InputArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="DetectMouse" type="CollisionShape3D" parent="InputArea"]
+transform = Transform3D(0.7698055, 0, 0, 0, 1.185282, 0.022325804, 0, -0.1510602, 0.17517766, 0, 0.40470257, 0.05797015)
+shape = SubResource("ConvexPolygonShape3D_n1m7g")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+lifetime = 2.36
 speed_scale = 1.45
+explosiveness = 0.53
 process_material = SubResource("ParticleProcessMaterial_fngpf")
 draw_pass_1 = SubResource("BoxMesh_8isn6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.41120625, 0, 0, 0, 0.20449299, -0.6147953, 0, 1.0529081, 0.11940391, 0, 0.37028313, 0)
 mesh = SubResource("PlaneMesh_fngpf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8isn6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_arjcp")
+}
+
+[connection signal="area_entered" from="InputArea" to="." method="_mouse_entered"]
+[connection signal="area_exited" from="InputArea" to="." method="_mouse_left"]

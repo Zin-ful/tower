@@ -58,11 +58,11 @@ var invincibility_timer := 0.0
 
 @export_group("Shader")
 @export_range (0.0, 100.0, 0.1) var pixelization: float
-@onready var shader_mesh: MeshInstance3D = $Head/Camera3D/PixelFilter
+@onready var shader_mesh: ColorRect = $Interface/HUD/PixelFilter
 
 @onready var cache_max_speed := max_speed
 @onready var player_head = $Head
-@onready var camera = $Head/Camera3D
+@onready var camera = $Head/Camera
 
 enum SpeedMod {SPRINT, WALL_JUMP_BOOST, DASH}
 var _speed_modifiers: Dictionary = {}
@@ -124,7 +124,7 @@ func _ready():
 	add_to_group("player")
 	if camera:
 		camera.fov = base_fov
-	shader_mesh.mesh.get_material().set("shader_parameter/pixel_size",pixelization)
+	shader_mesh.get_material().set("shader_parameter/pixel_size",pixelization)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -470,10 +470,17 @@ func enable_movement():
 	set_physics_process(true)
 	set_process_unhandled_input(false)
 	
-func fade_to_black():
+func fade_to_black(time: float = 0.5, wait:bool = false):
 	tween = create_tween()
-	tween.tween_property(black_screen, "modulate:a", 1.0, 1.0)
+	tween.tween_property(black_screen, "modulate:a", 1.0, time)
+	if wait:
+		await tween.finished
 
-func fade_to_clear(time: float = 0.5):
+func fade_to_clear(time: float = 0.5, wait:bool = false):
 	tween = create_tween()
 	tween.tween_property(black_screen, "modulate:a", 0.0, time)
+	if wait:
+		await tween.finished
+
+func get_mouse():
+	return get_viewport().get_mouse_position()

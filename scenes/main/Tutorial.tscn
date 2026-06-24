@@ -24,7 +24,7 @@ script = ExtResource("1_edy4c")
 [node name="player" parent="." instance=ExtResource("1_ov3wj")]
 transform = Transform3D(-0.6810021, 0, 0.73228145, 0, 1, 0, -0.73228145, 0, -0.6810021, 357.77893, 7.9866333, -12.350632)
 max_wall_angle = 170.0
-pixelization = 3.0
+pixelization = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fr6qw")
