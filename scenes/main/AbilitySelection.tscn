@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://cgjyggk3k3du3"]
+[gd_scene load_steps=28 format=3 uid="uid://cgjyggk3k3du3"]
 
 [ext_resource type="Script" uid="uid://jovdog6n0wl" path="res://scripts/levels/ability_selection.gd" id="1_esj08"]
-[ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://scenes/player/player.tscn" id="1_gd18s"]
 [ext_resource type="PackedScene" uid="uid://cjrjduk6rkvmc" path="res://scenes/utility/SpawnPoint.tscn" id="2_7r16b"]
 [ext_resource type="PackedScene" uid="uid://dluynpbcpkkoq" path="res://scenes/utility/AbilityObject.tscn" id="3_2j44i"]
 
@@ -220,7 +219,7 @@ emission_energy_multiplier = 1.25
 [sub_resource type="SphereMesh" id="SphereMesh_vh272"]
 material = SubResource("StandardMaterial3D_a30sw")
 
-[node name="AbilitySelect" type="Node3D" node_paths=PackedStringArray("cursor")]
+[node name="Dungeon" type="Node3D" node_paths=PackedStringArray("cursor")]
 script = ExtResource("1_esj08")
 cursor = NodePath("Cursor")
 
@@ -248,10 +247,6 @@ mesh = SubResource("SphereMesh_a30sw")
 
 [node name="SpawnPoint" parent="." instance=ExtResource("2_7r16b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.189, 0.466)
-
-[node name="player" parent="." instance=ExtResource("1_gd18s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1892657, 0.46605492)
-pixelization = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gd18s")
@@ -294,12 +289,11 @@ spot_angle = 24.350285
 [node name="Abilities" type="Node3D" parent="."]
 
 [node name="Ability" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(-0.44902277, -0.07638389, -0.8902493, 7.4505793e-09, 0.9963393, -0.08548646, 0.89352006, -0.038385384, -0.4473791, -0.6019584, 5.9669847, -2.2773414)
+transform = Transform3D(-0.44902274, -0.07638392, -0.8902493, -4.0978183e-08, 0.9963393, -0.08548648, 0.89352, -0.03838535, -0.4473791, -0.6019584, 5.9669847, -2.2773414)
 
 [node name="Ability2" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(-1, 3.2630945e-09, 1.5089928e-07, -2.131638e-09, 0.99936104, -0.035736706, -1.5091958e-07, -0.035736717, -0.99936074, 0.7912396, 5.887005, -2.2554886)
+transform = Transform3D(-1, 3.2630947e-09, 1.5089927e-07, -2.1316384e-09, 0.9993609, -0.03573671, -1.5091958e-07, -0.03573672, -0.9993606, 0.7912396, 5.887005, -2.2554886)
 
-[connection signal="on_click" from="player" to="." method="_on_click"]
 [connection signal="select" from="Abilities/Ability" to="." method="_on_ability_select"]
 [connection signal="unselect" from="Abilities/Ability" to="." method="_on_ability_unselect"]
 [connection signal="select" from="Abilities/Ability2" to="." method="_on_ability_select"]

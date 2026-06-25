@@ -17,7 +17,7 @@ fog_density = 0.1622
 
 [sub_resource type="Compositor" id="Compositor_p3v23"]
 
-[node name="Tutorial" type="Node3D"]
+[node name="Dungeon" type="Node3D"]
 script = ExtResource("1_edy4c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -26,7 +26,10 @@ camera_attributes = SubResource("CameraAttributesPractical_oiqhk")
 compositor = SubResource("Compositor_p3v23")
 
 [node name="SpawnPoint" parent="." instance=ExtResource("2_1lbuk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 377.58597, 0, 12.097671)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 375.18115, 0, 12.097671)
+
+[node name="GoalPoint" parent="." instance=ExtResource("2_1lbuk")]
+transform = Transform3D(-0.6344472, 0, 0.772966, 0, 1, 0, -0.772966, 0, -0.6344472, -295.40775, 0, -255.48077)
 
 [node name="TestSewer" parent="." instance=ExtResource("4_1lbuk")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -397.42325, -0.19155121, -178.93881)

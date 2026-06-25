@@ -1,15 +1,25 @@
 extends Node3D
 @export var cursor: GPUParticles3D
-@onready var player: CharacterBody3D = $player
-var player_location: Vector3 = Vector3(0.0, 1.189, 0.466)
-var player_roation: Vector3 = Vector3(0.0, 0.0, 0.0)
+@onready var player = get_parent().get_parent().get_node("player")
 @onready var ability: Node3D = $Abilities/Ability
 @onready var ability_2: Node3D = $Abilities/Ability2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var parent = get_parent().get_parent()
 var on_card = false
 var selected_card = 0
 var viewing = false
+
+signal level_completed
+
+func _ready():
+	randomize_ability()
+	set_physics_process(false)
+	cursor.visible = false
+	player.disable_mouse()
+	player.disable_movement()
+	#parent.connect("level_completed", parent, "_on_goal_level_completed")
+	call_deferred("_intro")
+	
 
 func random(list:Array):
 	return list[randi() % list.size()]
@@ -71,7 +81,7 @@ func randomize_ability():
 		var new_ability = random(abilities)
 		if new_ability == "timeslow":
 			value = randi_range(10, 80) / 100.0
-		ability.selected_ability.set_ability_options(ability, value, (randi_range(100, 500) / 100.0))
+		ability.selected_ability.set_ability_options(new_ability, value, (randi_range(100, 500) / 100.0))
 	else:
 		ability.selected_ability.set_ability_options(random(upgrade_options), value)
 	ability.set_page_value(1)
@@ -89,23 +99,11 @@ func randomize_ability():
 		var new_ability = random(abilities)
 		if new_ability == "timeslow":
 			value = randi_range(10, 80) / 100.0
-		ability_2.selected_ability.set_ability_options(ability, value, (randi_range(100, 500) / 100.0))
+		ability_2.selected_ability.set_ability_options(new_ability, value, (randi_range(100, 500) / 100.0))
 	else:
 		ability_2.selected_ability.set_ability_options(random(upgrade_options), value)
 	ability_2.set_page_value(2)
-	
-	
 
-func _ready():
-	randomize_ability()
-	set_physics_process(false)
-	cursor.visible = false
-	player.disable_mouse()
-	player.disable_movement()
-	player.position = player_location
-	player.rotation = player_roation
-	call_deferred("_intro")
-	
 func _intro():
 	animation_player.play("Fall")
 	await player.fade_to_clear(1.5, true)
@@ -150,7 +148,9 @@ func select_card():
 	else:
 		player.add_ability(ability_2.selected_ability)
 	animation_player.play("Accept_" + str(selected_card))
-
+	while animation_player.is_playing(): pass
+	emit_signal("level_completed")
+	
 func _on_ability_select(value: int) -> void:
 	on_card = true
 	selected_card = value

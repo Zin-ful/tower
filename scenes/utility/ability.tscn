@@ -4,9 +4,3 @@
 
 [node name="Ability" type="Node3D"]
 script = ExtResource("1_jc83e")
-type = "Upgrade"
-ability_choice = null
-intensity = null
-duration = null
-upgrade_choice = null
-upgrade_amount = null
