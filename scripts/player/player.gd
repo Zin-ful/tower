@@ -1,6 +1,12 @@
 extends CharacterBody3D
 
 @export var diagnostics_enabled: bool = false
+
+@export_group("Abilities")
+@export var ability_1: Ability
+@export var ability_2: Ability
+@export var ability_3: Ability
+
 @export_group("Health")
 @export var health := 100.0 ##Player starting health
 @export var health_max := 100.0 ##The maximum health that the player can heal to
@@ -111,6 +117,8 @@ var tween = null
 @onready var black_screen: ColorRect = $Interface/HUD/BlackScreen
 @onready var hud: Control = $Interface/HUD
 
+#mouse signals
+signal on_click
 
 func _ready():
 	if diagnostics_enabled:
@@ -132,10 +140,23 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		rotation_x = clamp(rotation_x - event.relative.y * mouse_sensitivity, -90, 90)
 		player_head.rotation.x = deg_to_rad(rotation_x)
+	else:
+		if event is InputEventMouseButton:
+			if event.button_index and event.is_pressed():
+				_on_click(event.button_index)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("move_pause"):
 		toggle_mouse()
+	if Input.is_action_just_pressed("ability_1"):
+		if ability_1:
+			ability_1.execute()
+	elif Input.is_action_just_pressed("ability_2"):
+		if ability_2:
+			ability_2.execute()
+	elif Input.is_action_just_pressed("ability_3"):
+		if ability_3:
+			ability_3.execute()
 
 func add_speed_modifier(id: SpeedMod, multiplier: float, duration: float = -1.0) -> void:
 	_speed_modifiers[id] = {"mult": multiplier, "timer": duration}
@@ -485,7 +506,27 @@ func fade_to_clear(time: float = 0.5, wait:bool = false):
 
 func get_mouse():
 	return get_viewport().get_mouse_position()
+
+func _on_click(button: int) -> void:
+	emit_signal("on_click", button)
 	
 func upgrade(upgrade_name: String, amount: float):
-	var upgradables = {"Max Health": health_max, "Regeneration": regen, "Max Stamina": stamina_max, "Max Speed": max_speed, "Jump Quanitiy":jumps, "Jump Height":jump_speed, "Wall Jump Boost Duration":wall_jump_boost_duration, "Wall Jump Speed": wall_jump_force, "Wall Jump Max Speed":wall_jump_velocity_max}
+	var upgradables = {"Max Health": health_max, "Regeneration": regen, "Max Stamina": stamina_max, "Max Speed": max_speed, "Jump Quanity":jumps, "Jump Height":jump_speed, "Wall Jump Boost Duration":wall_jump_boost_duration, "Wall Jump Speed": wall_jump_force, "Wall Jump Max Speed":wall_jump_velocity_max}
 	upgradables[upgrade_name] += amount
+
+
+func add_ability(new_ability: Ability):
+	if new_ability.type == "Upgrade":
+		new_ability.execute()
+		return
+	if not ability_1:
+		ability_1 = new_ability
+	elif not ability_2:
+		ability_2 = new_ability
+	elif not ability_3:
+		ability_3 = new_ability
+	else:
+		overwrite_ability(new_ability)
+
+func overwrite_ability(new_ability: Ability):
+	pass

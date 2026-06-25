@@ -1,8 +1,45 @@
-[gd_scene load_steps=26 format=3 uid="uid://cgjyggk3k3du3"]
+[gd_scene load_steps=29 format=3 uid="uid://cgjyggk3k3du3"]
 
 [ext_resource type="Script" uid="uid://jovdog6n0wl" path="res://scripts/levels/ability_selection.gd" id="1_esj08"]
 [ext_resource type="PackedScene" uid="uid://bk2r4u7mfbf1b" path="res://scenes/player/player.tscn" id="1_gd18s"]
-[ext_resource type="PackedScene" uid="uid://dluynpbcpkkoq" path="res://scenes/main/AbilityObject.tscn" id="3_2j44i"]
+[ext_resource type="PackedScene" uid="uid://cjrjduk6rkvmc" path="res://scenes/utility/SpawnPoint.tscn" id="2_7r16b"]
+[ext_resource type="PackedScene" uid="uid://dluynpbcpkkoq" path="res://scenes/utility/AbilityObject.tscn" id="3_2j44i"]
+
+[sub_resource type="Animation" id="Animation_0fpu5"]
+resource_name = "Accept_1"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.0095098615, 1.2446108, -0.7194834, 0.2, 1, -0.0095098615, 2.829113, -0.7194834, 0.5, 1, -0.0095098615, 4.5481467, -0.7194834)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.042782415, 0, 0, 0.9990844, 0.13333334, 1, 0.020075234, 0.882262, -0.037779886, 0.46881068, 0.3, 1, 0.022455214, -0.8504029, 0.03641564, 0.52438956)
+
+[sub_resource type="Animation" id="Animation_plybp"]
+resource_name = "Accept_2"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Abilities/Ability2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.02664411, 1.306097, -0.7681036, 0.33333334, 1, 0.02664411, 3.306097, -0.7681036)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Abilities/Ability2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017871212, 0, 0, 0.99984026, 0.16666667, 1, 0.010879304, 0.7932265, -0.014178184, 0.6086642, 0.33333334, 1, 4.657357e-10, 0.99984026, -0.017871208, 8.569536e-08)
 
 [sub_resource type="Animation" id="Animation_2j44i"]
 resource_name = "Fall"
@@ -66,7 +103,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Abilities/Ability2")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.02664411, 1.306097, -0.7681036, 0.53333336, 1, 0.7912396, 0.5924406, -2.2554886)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.02664411, 1.306097, -0.7681036, 0.5, 1, 0.7912396, 0.5924406, -2.2554886)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -113,6 +150,8 @@ tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.99999994, 0.5, 1, 0.01787121
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a30sw"]
 _data = {
+&"Accept_1": SubResource("Animation_0fpu5"),
+&"Accept_2": SubResource("Animation_plybp"),
 &"Fall": SubResource("Animation_2j44i"),
 &"RESET": SubResource("Animation_7r16b"),
 &"Return_1": SubResource("Animation_r6vgx"),
@@ -207,6 +246,9 @@ shape = SubResource("ConvexPolygonShape3D_7r16b")
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
 mesh = SubResource("SphereMesh_a30sw")
 
+[node name="SpawnPoint" parent="." instance=ExtResource("2_7r16b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.189, 0.466)
+
 [node name="player" parent="." instance=ExtResource("1_gd18s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1892657, 0.46605492)
 pixelization = 4.0
@@ -216,7 +258,7 @@ environment = SubResource("Environment_gd18s")
 compositor = SubResource("Compositor_2j44i")
 
 [node name="Backdrop" type="StaticBody3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 0.07922464, -0.9968568, 0, 0.9968568, 0.07922464, 0, 1.0392456, -2.4304466)
+transform = Transform3D(1, 0, 0, 0, 0.07470956, -1.7116996, 0, 0.94004506, 0.13603638, 0, 1.9585624, -2.5615158)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Backdrop"]
 transform = Transform3D(3.2044373, 0, 0, 0, 0.94452715, 7.450581e-09, 0, 0, 1.1494628, 0, 0, 0)
@@ -252,11 +294,12 @@ spot_angle = 24.350285
 [node name="Abilities" type="Node3D" parent="."]
 
 [node name="Ability" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6019584, 5.9669847, -2.2773414)
+transform = Transform3D(-0.44902277, -0.07638389, -0.8902493, 7.4505793e-09, 0.9963393, -0.08548646, 0.89352006, -0.038385384, -0.4473791, -0.6019584, 5.9669847, -2.2773414)
 
 [node name="Ability2" parent="Abilities" instance=ExtResource("3_2j44i")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.999361, -0.035736725, 0, 0.035736725, 0.999361, 0.7912396, 5.887005, -2.2554886)
+transform = Transform3D(-1, 3.2630945e-09, 1.5089928e-07, -2.131638e-09, 0.99936104, -0.035736706, -1.5091958e-07, -0.035736717, -0.99936074, 0.7912396, 5.887005, -2.2554886)
 
+[connection signal="on_click" from="player" to="." method="_on_click"]
 [connection signal="select" from="Abilities/Ability" to="." method="_on_ability_select"]
 [connection signal="unselect" from="Abilities/Ability" to="." method="_on_ability_unselect"]
 [connection signal="select" from="Abilities/Ability2" to="." method="_on_ability_select"]

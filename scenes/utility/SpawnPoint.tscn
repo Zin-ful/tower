@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjrjduk6rkvmc"]
+
+[ext_resource type="Script" uid="uid://cdlbj8e62jby" path="res://scripts/utility/spawn_point.gd" id="1_tpju5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jewa4"]
+transparency = 1
+albedo_color = Color(1, 0.07058824, 0.42352942, 0.40392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v6h2v"]
+material = SubResource("StandardMaterial3D_jewa4")
+
+[node name="SpawnPoint" type="Node3D"]
+script = ExtResource("1_tpju5")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v6h2v")

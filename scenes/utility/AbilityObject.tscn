@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dluynpbcpkkoq"]
 
-[ext_resource type="Script" uid="uid://cpcoan4ucaeui" path="res://scripts/levels/ability_object.gd" id="1_8isn6"]
+[ext_resource type="Script" uid="uid://cpcoan4ucaeui" path="res://scripts/utility/ability_object.gd" id="1_8isn6"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1m7g"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
@@ -55,7 +55,6 @@ shape = SubResource("ConvexPolygonShape3D_n1m7g")
 [node name="Particles" type="GPUParticles3D" parent="."]
 lifetime = 2.36
 speed_scale = 1.45
-explosiveness = 0.53
 process_material = SubResource("ParticleProcessMaterial_fngpf")
 draw_pass_1 = SubResource("BoxMesh_8isn6")
 
