@@ -95,15 +95,25 @@ Lights:
 
 # - A numbered object
 
+
 Declarations:
 	Lights will always be underneath a Node3D object named "Lighting"
 	Traps will always exist under a Node3D named "Trap"
 	Animation Players retain their default name
 	Trap Scripts need to be attached to the root node
 
+Root Scene Layout:
+	ROOT (Node3D):
+		player (child scene)
+		Goal (child scene)
+		Level (Node3D):
+			Dungeon (child scene, any full level object)
+
 Piece Scene Layouts:
-	Root (Node3D, name of object):
+	Root (Node3D, named Dungeon):
 		AnimationPlayer
+		SpawnPoint - where the player spawns
+		GoalPoint - where the goal spawns
 		Structure (MeshInstance3D, name):
 			StaticBody3D:
 				CollisionShape3D (Trimesh)

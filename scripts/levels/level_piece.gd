@@ -4,8 +4,6 @@ extends Node3D
 @export var traps: Array[NodePath] = [] ##Assign the paths to traps here
 
 func _ready():
-	var player = get_tree().get_first_node_in_group("player")
-	player.fade_to_clear()
 	if randomize_traps:
 		turn_off_traps()
 		randomize_trap()
@@ -25,6 +23,9 @@ func randomize_trap():
 	if not trap:
 		printerr("Trap not found! You have an invalid path inside of your trap randomization!")
 	trap.visible = true
+
+func get_level_type():
+	return "Piece"
 
 #func _player_entered_water(body: Node3D) -> void:
 #	if body.has_method("is_player"):
