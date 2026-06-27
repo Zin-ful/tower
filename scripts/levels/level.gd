@@ -20,28 +20,32 @@ func _ready() -> void:
 	if type == "Dungeon" and not biome:
 		printerr("Type is of Dungeon but the Biome has not been defined. This will break!")
 
-func spawn(): ##Needs to be called by controller third
+func spawn():
 	var selected_item
+	var next_transform := Transform3D.IDENTITY
+	
 	while spawn_amount:
 		if avaliable_pieces.size() > 1:
 			var selection = randi_range(0, avaliable_pieces.size())
 			selected_item = avaliable_pieces[selection - 1]
 		else:
 			selected_item = avaliable_pieces[0]
+
 		var piece = load(selected_item).instantiate()
 		pieces.add_child(piece)
 		piece.set_id(current_id)
-		piece.global_position = next_position - piece.get_start()
-		next_position = piece.global_position + piece.get_end()
+
+		piece.global_transform = next_transform * piece.get_start_transform().inverse()
+		next_transform = piece.get_node("End").global_transform
+
 		spawn_amount -= 1
 		spawned_pieces[current_id] = piece
 		current_id += 1
-	spawn_point.global_position = spawned_pieces[0].get_node("Start").global_position
-	spawn_point.global_rotation = spawned_pieces[0].get_node("Start").global_rotation
+
+	spawn_point.global_transform = spawned_pieces[0].get_node("Start").global_transform
 	var end_index = spawned_pieces.keys().size() - 1
 	if end_index > 0:
-		goal_point.global_rotation = spawned_pieces[end_index].get_node("End").global_rotation
-
+		goal_point.global_transform = spawned_pieces[end_index].get_node("End").global_transform
 func configure_spawn(amount: int): ##Needs to be called by controller second
 	spawn_amount = amount
 
