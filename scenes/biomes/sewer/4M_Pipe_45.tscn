@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://cnjnwqit4vl7s"]
+[gd_scene load_steps=7 format=4 uid="uid://cnjnwqit4vl7s"]
 
 [ext_resource type="Script" uid="uid://cm3foyv2wstfo" path="res://scripts/levels/level_piece.gd" id="1_kex0t"]
+[ext_resource type="PackedScene" uid="uid://bf4ffw7b6ndob" path="res://scenes/utility/Spotlight.tscn" id="2_kex0t"]
 [ext_resource type="PackedScene" uid="uid://dpusjfcrmkgc5" path="res://scenes/utility/joint.tscn" id="3_qflu7"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ayq1u"]
@@ -53,26 +54,26 @@ shape = SubResource("ConcavePolygonShape3D_dthli")
 [node name="Lighting" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 98.56998, 21.141161, 0)
-light_energy = 10.0
-light_bake_mode = 1
-spot_range = 51.0
-spot_attenuation = 0.43
+[node name="Bulb" parent="Lighting" instance=ExtResource("2_kex0t")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 101.59736, 21.027002, 0)
+range = 54.41
+attenuation = 0.485
+angle = 55.74
+energy = 1.5
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -43.734486, 21.141161, -53.59797)
-light_energy = 10.0
-light_bake_mode = 1
-spot_range = 49.0
-spot_attenuation = 0.43
+[node name="Bulb2" parent="Lighting" instance=ExtResource("2_kex0t")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12.015184, 21.027002, -9.414643)
+range = 54.41
+attenuation = 0.485
+angle = 55.74
+energy = 1.5
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 12.307289, 21.141161, -9.903702)
-light_energy = 10.0
-light_bake_mode = 1
-spot_range = 50.0
-spot_attenuation = 0.43
+[node name="Bulb3" parent="Lighting" instance=ExtResource("2_kex0t")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -43.75283, 21.027002, -53.599865)
+range = 54.41
+attenuation = 0.485
+angle = 55.74
+energy = 1.5
 
 [node name="Start" parent="." instance=ExtResource("3_qflu7")]
 transform = Transform3D(-0.70710665, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710665, -71.82095, 0, -80.47776)

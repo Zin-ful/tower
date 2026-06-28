@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var construction: Node3D = $Lazer/Construction #No change
 @onready var animation_player: AnimationPlayer = get_parent().get_node("AnimationPlayer") #No change
-@onready var lights: Node3D = get_parent().get_node("Lighting") #No change
+@onready var lights = get_parent().get_node("Lighting").get_children() #No change
 
 @export var idle_animation_name = ""
 @export var action_animation_name = ""
@@ -30,7 +30,9 @@ func _ready():
 func _detect_player(body: Node3D) -> void:
 	if body.has_method("is_player"):
 		if turn_off_lights:
-			lights.visible = false
+			if lights:
+				for item in lights:
+					item.toggle = false
 		construction.visible = true
 		if action_animation_name:
 			animation_player.play(action_animation_name)
@@ -38,7 +40,8 @@ func _detect_player(body: Node3D) -> void:
 			if destroy_trap_on_end:
 				queue_free()
 		if lights:
-			lights.visible = true
+			for item in lights:
+				item.toggle = true
 
 
 func _detect_hitbox(body: Node3D) -> void:

@@ -47,21 +47,22 @@ func load_level(path: String):
 	goal.disable()
 	for child in level_node.get_children():
 		child.queue_free()
-
 	dungeon = load(path).instantiate()
 	level_node.add_child(dungeon)
-	dungeon.skip_testing = skip_testing
+	var level_type = dungeon.get_level_type()
+	if level_type == "Dungeon":
+		dungeon.skip_testing = skip_testing
 	dungeon.populate()
 	dungeon.configure_spawn(10)
 	await dungeon.spawn()
-	print(dungeon.get_level_type())
+	print(level_type)
 	var spawn = dungeon.get_node("SpawnPoint")
 	if not spawn:
 		printerr("No spawn point!!!")
 	player.global_position = spawn.global_position
 	player.global_rotation = spawn.global_rotation
 	emit_signal("level_changed")
-	if dungeon.get_level_type() == "Dungeon":
+	if level_type == "Dungeon":
 		player.fade_to_clear()
 	else:
 		print("Resetting timers")
