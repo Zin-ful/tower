@@ -6,7 +6,8 @@
 
 [node name="ROOT" type="Node3D"]
 script = ExtResource("1_j5px3")
-skip_testing = true
+spawn_amount = 20
+room_cooldown = 10
 assigned_level = "res://scenes/main/AbilitySelection.tscn"
 
 [node name="Level" type="Node3D" parent="."]

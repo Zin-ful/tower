@@ -1,8 +1,13 @@
 extends Node3D
 
-@export var skip_testing: bool = false
-@export var test_load: bool = false
-@export var assigned_level: String
+@export var spawn_amount: int = 0 ##The amount of total pieces that can be spawned
+@export var room_cooldown: int = 0 ##The amount of connection pieces required before another room can spawn
+
+@export_group("Experimental Settings")
+@export var room_cooldown_enable_divide: bool = false ##Instead of the room cooldown variable representing the amount of connection pieces between rooms, it instead specifies the ratio of rooms to Spawn Amount. With this enabled, Room Cooldown being set to 2 means that if Spawn Amount is 10, room cooldown would be Spawn Amount / Room Cooldown or 5
+@export var skip_unfinished_levels: bool = false ##Skips testing levels prefixed with "-"
+@export var test_load: bool = false ##Enables the default loading of the assigned level
+@export var assigned_level: String ##A scene you want to load by default. Needs to comply with level specifications
 
 @onready var level_node: Node3D = $Level
 @onready var dungeon: Node3D
@@ -18,6 +23,11 @@ var current_floor = -1
 signal level_changed
 
 func _ready():
+	if not spawn_amount:
+		printerr("No spawn amount set! Will crash!")
+		return
+	if room_cooldown_enable_divide:
+		room_cooldown = spawn_amount / room_cooldown
 	load_first_level()
 	set_player()
 	set_goal()
@@ -52,9 +62,9 @@ func load_level(path: String):
 	level_node.add_child(dungeon)
 	var level_type = dungeon.get_level_type()
 	if level_type == "Dungeon":
-		dungeon.skip_testing = skip_testing
+		dungeon.skip_testing = skip_unfinished_levels
 		dungeon.populate()
-		dungeon.configure_spawn(10)
+		dungeon.configure_spawn(spawn_amount, room_cooldown)
 		await dungeon.spawn()
 	print(level_type)
 	var spawn = dungeon.get_node("SpawnPoint")
@@ -67,14 +77,16 @@ func load_level(path: String):
 		player.fade_to_clear()
 	else:
 		print("Resetting timers")
-		player.set_level("???")
+		if level_type == "Ability":
+			player.set_level("???")
+		else:
+			player.set_level("Sentenced")
 		player.reset_timers()
+		player.fade_to_clear(2.0)
 		return
 	goal.enable()
 	current_floor += 1
-	if current_floor > 0:
-		player.set_level(str(current_floor))
-	await player.fade_to_clear(2.0)
+	player.set_level(str(current_floor))
 
 func load_first_level():
 	player.fade_to_black(1.0, true)

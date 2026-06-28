@@ -76,7 +76,7 @@ angle = 55.74
 energy = 1.5
 
 [node name="Start" parent="." instance=ExtResource("3_qflu7")]
-transform = Transform3D(-0.70710665, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710665, -71.82095, 0, -80.47776)
+transform = Transform3D(-0.70710665, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710665, -71.82095, 0, -82.2364)
 
 [node name="End" parent="." instance=ExtResource("3_qflu7")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 129.366, 0, 0)

@@ -6,7 +6,7 @@ extends Node3D
 @onready var spawn_point: Node3D = $SpawnPoint
 @onready var goal_point: Node3D = $GoalPoint
 var skip_testing = 1
-
+var room_cooldown = 0
 var get_biome = {"Sewer":"res://scenes/biomes/sewer/", "Fields":"res://scenes/biomes/fields/", "Space":"res://scenes/biomes/space/","Tower":"res://scenes/biomes/tower/"}
 
 var spawn_amount: int
@@ -33,10 +33,13 @@ func spawn():
 			if skip_testing:
 				if "-" in selected_item:
 					continue
-			if current_id == 0 or current_id == 1 or "Room" in spawn_tracker[spawn_tracker.size() - 1]:
+			if room_cooldown > 0:
 				while "Room" in selected_item:
-					selection = randi_range(0, avaliable_pieces.size())
-					selected_item = avaliable_pieces[selection - 1]
+					selected_item = avaliable_pieces.pick_random()
+				room_cooldown -= 1
+			else:
+				if "Room" in selected_item:
+					room_cooldown = 4
 		else:
 			selected_item = avaliable_pieces[0]
 		spawn_tracker.append(selected_item)
@@ -58,9 +61,9 @@ func spawn():
 	if end_index > 0:
 		goal_point.global_transform = spawned_pieces[end_index].get_node("End").global_transform
 
-func configure_spawn(amount: int): ##Needs to be called by controller second
+func configure_spawn(amount: int, cooldown: int): ##Needs to be called by controller second
 	spawn_amount = amount
-
+	room_cooldown = cooldown
 func populate(): ##Needs to be called by controller first
 	var dir := DirAccess.open(get_biome[biome])
 	if dir == null: printerr("Could not open folder"); return

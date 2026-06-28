@@ -480,12 +480,14 @@ func enable_movement():
 	set_process_unhandled_input(true)
 	
 func fade_to_black(time: float = 0.5, wait:bool = false):
+	black_screen.color.a = 0.0
 	tween = create_tween()
 	tween.tween_property(black_screen, "modulate:a", 1.0, time)
 	if wait:
 		await tween.finished
 
 func fade_to_clear(time: float = 0.5, wait:bool = false):
+	black_screen.color.a = 1.0
 	tween = create_tween()
 	tween.tween_property(black_screen, "modulate:a", 0.0, time)
 	if wait:
@@ -536,11 +538,14 @@ func _on_root_level_changed() -> void:
 func set_level(value: String):
 	#level.set("theme_override_colors/font_color", Color(1, 0, 0))
 	tween = create_tween()
-	tween.tween_property(level, "modulate:a", 0.0, 5.0)
+	tween.tween_property(level, "modulate:a", 0.0, 2.0)
 	await tween.finished
 	level.text = value
 	tween = create_tween()
-	tween.tween_property(level, "modulate:a", 1.0, 5.0)
+	tween.tween_property(level, "modulate:a", 1.0, 2.0)
+
+func get_level():
+	return level.text
 
 func reset_timers():
 	wall_jump_boost_timer = 0.0
