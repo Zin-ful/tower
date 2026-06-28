@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ct684lgqrgig6"]
 
 [ext_resource type="Script" uid="uid://cm3foyv2wstfo" path="res://scripts/levels/level_piece.gd" id="1_3a7qv"]
-[ext_resource type="ArrayMesh" uid="uid://nlhcmsdlossm" path="res://!TESTING/models/Rooms/Room_1.obj" id="2_3a7qv"]
+[ext_resource type="ArrayMesh" uid="uid://c5hsko4nbkbep" path="res://!TESTING/models/Rooms/Pool_Room.obj" id="2_q4r7u"]
 [ext_resource type="PackedScene" uid="uid://dpusjfcrmkgc5" path="res://scenes/utility/joint.tscn" id="3_ua3d3"]
 [ext_resource type="PackedScene" uid="uid://cnjnwqit4vl7s" path="res://scenes/biomes/sewer/4M_Pipe_45.tscn" id="4_q4r7u"]
 
@@ -19,8 +19,8 @@ material = SubResource("StandardMaterial3D_q4r7u")
 script = ExtResource("1_3a7qv")
 
 [node name="Room" type="MeshInstance3D" parent="."]
-transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, -99.75392, -4, 4)
-mesh = ExtResource("2_3a7qv")
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, -125.75392, 43, 8)
+mesh = ExtResource("2_q4r7u")
 
 [node name="Bulb" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(0.19999997, 0, 0, 0, 0.19999997, 0, 0, 0, 0.19999997, 9.296192, 5.5672426, 0)
@@ -56,4 +56,4 @@ transform = Transform3D(0.9999999, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0,
 transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 183.48788, 77.99675, -78.0283)
 
 [node name="TestSewer" parent="." instance=ExtResource("4_q4r7u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 203, 171, 0)
+transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, -135, 76, 118)

@@ -34,7 +34,7 @@ Measurements (Not tracked by blender, use ruler tool):
 		Total Length (per node placement): * 4 Meters
 		Pipe Resolution: 6
 		Inner Diameter: * 0.75 Depth OR 1.5 Meters Inner Diameter (equal when measured)
-		Room Entrance and Exit Diameter: 0.6 Meters
+		Room Entrance and Exit Diameter: 0.6 Meters (For existing rooms) and 1.5 Meters for new rooms	
 		Angles: 1 Meter Offset @90° scaled to angle (45° == 0.5m Offset)
 		Circle Cut: See Flare Depth
 		Flare Width: * 0.15 Meters
