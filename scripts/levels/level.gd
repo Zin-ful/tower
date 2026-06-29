@@ -81,7 +81,7 @@ func get_piece_start(id: int):
 func get_piece_end(id: int):
 	return spawned_pieces[id].get_end()
 
-func _on_piece_entered(value:int):
+func _on_piece_entered(value: int):
 	player_position = value
 	print("Player Position: " + str(value) + " " + str(last_light_position))
 	spawned_pieces[player_position].get_node("Checkpoint").queue_free()
@@ -94,6 +94,6 @@ func _on_piece_entered(value:int):
 			break
 	for pos in range(player_position - 4, player_position):
 		spawned_pieces[pos].toggle_lights()
-	for pos in range(0, 1):
-		spawned_pieces[0].queue_free()
-		spawned_pieces.erase(0)
+	var oldest_key = spawned_pieces.keys().min()
+	spawned_pieces[oldest_key].queue_free()
+	spawned_pieces.erase(oldest_key)
