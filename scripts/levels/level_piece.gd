@@ -15,8 +15,8 @@ func _ready():
 	for area in overlap:
 		area.set_collision_layer_value(5, true)
 		area.set_collision_mask_value(5, true)
-		area.monitoring = true
-		area.monitorable = true
+		#area.monitoring = true
+		#area.monitorable = true
 	if randomize_traps:
 		turn_off_traps()
 		randomize_trap()
@@ -26,7 +26,6 @@ func set_lights(toggle: bool):
 		item.set_light(toggle)
 
 func turn_off_traps():
-	print("Randomized traps ARE enabled, ensure this is intentional. Any trap assigned will be set to invisible.")
 	for i in traps:
 		var temp = get_node(i)
 		temp.visible = false
@@ -34,11 +33,7 @@ func turn_off_traps():
 
 func randomize_trap():
 	var new_name = traps[randi_range(0, traps.size() - 1)]
-	print("Selected:")
-	print(name)
 	var trap = get_node(new_name)
-	if not trap:
-		printerr("Trap not found! You have an invalid path inside of your trap randomization!")
 	trap.visible = true
 
 func get_level_type():
@@ -67,7 +62,22 @@ func get_end_transform() -> Transform3D:
 func _on_checkpoint_body_entered(body: Node3D) -> void:
 	if body.has_method("is_player"):
 		player_entered.emit(id)
-	
+
+func _get_query_shape(collision_shape: CollisionShape3D) -> Dictionary:
+	var shape = collision_shape.shape
+	var query_transform = collision_shape.global_transform
+	if shape is ConcavePolygonShape3D:
+		var faces: PackedVector3Array = shape.get_faces()
+		if faces.size() > 0:
+			var aabb := AABB(faces[0], Vector3.ZERO)
+			for v in faces:
+				aabb = aabb.expand(v)
+			var box := BoxShape3D.new()
+			box.size = aabb.size
+			query_transform = query_transform * Transform3D(Basis.IDENTITY, aabb.get_center())
+			return {"shape": box, "transform": query_transform}
+	return {"shape": shape, "transform": query_transform}
+
 func overlaps() -> bool:
 	var found_overlap := false
 	for detector in overlap:
@@ -80,12 +90,14 @@ func overlaps() -> bool:
 			printerr("OverlapCheck child is missing a CollisionShape3D!")
 			continue
 
+		var qs = _get_query_shape(collision_shape)
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsShapeQueryParameters3D.new()
-		query.shape = collision_shape.shape
-		query.transform = collision_shape.global_transform
+		query.shape = qs.shape
+		query.transform = qs.transform
 		query.collision_mask = detector.collision_mask
-		query.exclude = [detector.get_rid()] 
+		query.collide_with_areas = true
+		query.exclude = [detector.get_rid()]
 		var results = space_state.intersect_shape(query, 32)
 		if results.size() > 0:
 			found_overlap = true
@@ -93,13 +105,8 @@ func overlaps() -> bool:
 			for result in results:
 				var collider = result.collider
 				if collider:
-					var owner_node = collider.owner if collider.owner else collider
 					print("%s (path: %s, mask: %d, layer: %d)" % [
-						collider.name,
-						collider.get_path(),
-						collider.collision_mask,
-						collider.collision_layer
+						collider.name, collider.get_path(),
+						collider.collision_mask, collider.collision_layer
 					])
-				else:
-					print("  -> (no collider on result, rid: %s)" % str(result.get("rid")))
 	return found_overlap

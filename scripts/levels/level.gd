@@ -55,16 +55,15 @@ func spawn():
 		spawn_amount -= 1
 		spawned_pieces[current_id] = piece
 		current_id += 1
+
 		if piece.overlaps():
-			#piece.queue_free()
-			#spawned_pieces.erase(current_id)
-			#spawn_tracker.erase(current_id)
 			break
+
 	spawn_point.global_transform = spawned_pieces[0].get_node("Start").global_transform
 	var end_index = spawned_pieces.keys().size() - 1
 	if end_index > 0:
 		goal_point.global_transform = spawned_pieces[end_index].get_node("End").global_transform
-	
+
 func configure_spawn(amount: int, cooldown: int): ##Needs to be called by controller second
 	spawn_amount = amount
 	room_cooldown = cooldown
