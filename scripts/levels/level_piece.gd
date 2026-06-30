@@ -69,8 +69,12 @@ func _on_checkpoint_body_entered(body: Node3D) -> void:
 		player_entered.emit(id)
 	
 func overlaps() -> bool:
-	for area in overlap:
-		var collision_shape = area.get_node("CollisionShape3D")
+	for detector in overlap:
+		var collision_shape: CollisionShape3D = null
+		for child in detector.get_children():
+			if child is CollisionShape3D:
+				collision_shape = child
+				break
 		if not collision_shape or not collision_shape.shape:
 			printerr("OverlapCheck child is missing a CollisionShape3D!")
 			continue
@@ -79,8 +83,8 @@ func overlaps() -> bool:
 		var query = PhysicsShapeQueryParameters3D.new()
 		query.shape = collision_shape.shape
 		query.transform = collision_shape.global_transform
-		query.collision_mask = area.collision_mask
-		query.exclude = [area]
+		query.collision_mask = detector.collision_mask
+		query.exclude = [detector]
 
 		var results = space_state.intersect_shape(query, 1)
 		if results.size() > 0:
