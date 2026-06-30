@@ -92,6 +92,6 @@ transform = Transform3D(11.879392, 0, -38.145588, 0, 54.431995, 0, 11.879393, 0,
 transform = Transform3D(246.84459, 0, -25.06339, 0, 35.444992, 0, 246.8446, 0, 25.063396, -32.850647, 0, -46)
 
 [node name="OverlapDetector2" parent="OverlapChecks" instance=ExtResource("5_jnyyo")]
-transform = Transform3D(378.1819, 0, 0, 0, 35.444992, 0, 0, 0, 35.444996, 70.14935, 0, -3)
+transform = Transform3D(337.4252, 0, 0, 0, 35.444992, 0, 0, 0, 35.444996, 75.23508, 0, -3)
 
 [connection signal="body_entered" from="Checkpoint" to="." method="_on_checkpoint_body_entered"]

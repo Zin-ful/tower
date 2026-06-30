@@ -7,7 +7,7 @@ extends Node3D
 @onready var goal_point: Node3D = $GoalPoint
 var room_cooldown = 0
 var get_biome = {"Sewer":"res://scenes/biomes/sewer/", "Fields":"res://scenes/biomes/fields/", "Space":"res://scenes/biomes/space/","Tower":"res://scenes/biomes/tower/"}
-
+var next_transform := Transform3D.IDENTITY
 var spawn_amount: int
 var current_id: int = 0
 var avaliable_pieces: Array = []
@@ -26,7 +26,6 @@ func _ready() -> void:
 
 func spawn():
 	var selected_item
-	var next_transform := Transform3D.IDENTITY
 	var spawn_tracker: Array = []
 	while spawn_amount:
 		if avaliable_pieces.size() > 1:
@@ -41,7 +40,9 @@ func spawn():
 		else:
 			selected_item = avaliable_pieces[0]
 		if next_piece:
+			print("Swapping to overridden piece")
 			selected_item = next_piece
+			next_piece = ""
 			
 		spawn_tracker.append(selected_item)
 		var piece = load(selected_item).instantiate()
@@ -52,13 +53,14 @@ func spawn():
 		piece.player_entered.connect(_on_piece_entered)
 		piece.global_transform = next_transform * piece.get_start_transform().inverse()
 		next_transform = piece.get_node("End").global_transform
+		await get_tree().physics_frame
+		if piece.overlaps():
+			piece.queue_free()
+			spawn_tracker.pop_back()
+			fix_overlap()
 		spawn_amount -= 1
 		spawned_pieces[current_id] = piece
 		current_id += 1
-
-		if piece.overlaps():
-			pass
-
 	spawn_point.global_transform = spawned_pieces[0].get_node("Start").global_transform
 	var end_index = spawned_pieces.keys().size() - 1
 	if end_index > 0:
@@ -92,12 +94,22 @@ func get_piece_start(id: int):
 func get_piece_end(id: int):
 	return spawned_pieces[id].get_end()
 
-func on_overlap():
-	#spawned_pieces[spawned_pieces.size() - 1].queue_free()
-	return
+func fix_overlap():
+	var previous_id = current_id - 1
+
+	spawned_pieces[previous_id].queue_free()
+	#print(is_instance_valid(spawned_pieces[current_id]))
+	spawned_pieces.erase(previous_id)
+
+	current_id -= 1
 	spawn_amount += 1
-	if ramp_pieces:
-		next_piece = ramp_pieces.pick_random()
+
+	if current_id > 0:
+		next_transform = spawned_pieces[current_id - 1].get_node("End").global_transform
+	else:
+		next_transform = Transform3D.IDENTITY
+
+	next_piece = ramp_pieces.pick_random()
 	
 func _on_piece_entered(value: int):
 	player_position = value

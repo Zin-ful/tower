@@ -12,11 +12,7 @@ signal player_entered(id)
 
 
 func _ready():
-	for area in overlap:
-		area.set_collision_layer_value(5, true)
-		area.set_collision_mask_value(5, true)
-		#area.monitoring = true
-		#area.monitorable = true
+		
 	if randomize_traps:
 		turn_off_traps()
 		randomize_trap()
@@ -79,8 +75,12 @@ func _get_query_shape(collision_shape: CollisionShape3D) -> Dictionary:
 	return {"shape": shape, "transform": query_transform}
 
 func overlaps() -> bool:
+	
 	var found_overlap := false
 	for detector in overlap:
+		detector.set_collision_layer_value(5, true)
+		detector.set_collision_mask_value(5, true)
+
 		var collision_shape: CollisionShape3D = null
 		for child in detector.get_children():
 			if child is CollisionShape3D:
@@ -98,7 +98,7 @@ func overlaps() -> bool:
 		query.collision_mask = detector.collision_mask
 		query.collide_with_areas = true
 		query.exclude = [detector.get_rid()]
-		var results = space_state.intersect_shape(query, 32)
+		var results = space_state.intersect_shape(query, 64)
 		if results.size() > 0:
 			found_overlap = true
 			print("Piece '%s' detector '%s' overlaps with:" % [name, detector.name])
@@ -109,4 +109,6 @@ func overlaps() -> bool:
 						collider.name, collider.get_path(),
 						collider.collision_mask, collider.collision_layer
 					])
+		else:
+			print("No overlap found")
 	return found_overlap
