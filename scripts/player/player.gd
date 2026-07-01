@@ -591,10 +591,10 @@ func remove_damage_filter():
 	tween = create_tween()
 	tween.tween_property(damage_filter, "color:a", 0.0, 0.2)
 
-func apply_blur_filter(amount: float, length: float):
+func increase_filter(length: float):
 	tween = create_tween()
-	tween.tween_property(blur_filter, "modulate:a", amount, length)
+	tween.tween_property(shader_mesh.get_material(), "shader_parameter/pixel_size", pixelization * 5, length)
 
-func remove_blur_filter(length: float):
+func restore_filter(length: float):
 	tween = create_tween()
-	tween.tween_property(blur_filter, "modulate:a", 0.0, length)
+	tween.tween_property(shader_mesh.get_material(), "shader_parameter/pixel_size", pixelization, length)

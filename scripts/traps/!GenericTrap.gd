@@ -11,7 +11,8 @@ extends Node3D
 @export var slow_player: bool ##Enables slowing of player
 @export var intensity: float ##How much to the player slows. 1 = normal speed, 2 = double speed, 0.5 = half speed
 @export var duration: float ##How long it lasts
-@export_group("Group")
+@export_group("Animations")
+@export var blur_screen: bool
 @export var idle_animation_name = "" ##Name of idle animation within parent scene. Typing in a name will assume activation on ready
 @export var action_animation_name = "" ##Name of action animation within parent scene trigged by detection zone. Typing in a name assumes it will be used on activation
 @export var hide_mesh_until_trigger: bool = false ##Hides the meshes of an object until player is detected. This does not effect hitboxes
@@ -68,6 +69,8 @@ func _detect_hitbox(body: Node3D) -> void:
 	if body.has_method("is_player"):
 		if slow_player:
 			body.add_speed_modifier(SpeedMod.SLOW, intensity)
+		if blur_screen:
+			body.increase_filter(0.3)
 		if do_damage:
 			body.take_damage(randi_range(min_damage, max_damage))
 			body.apply_damage_filter()
@@ -76,7 +79,10 @@ func _detect_hitbox(body: Node3D) -> void:
 		if slow_player:
 			await get_tree().create_timer(duration).timeout
 			body.remove_speed_modifier(SpeedMod.SLOW)
-
+		if blur_screen:
+			body.restore_filter(1.0)
+			await get_tree().create_timer(1.5).timeout
+			
 func disable_hitbox():
 	damage_area.monitoring = false
 

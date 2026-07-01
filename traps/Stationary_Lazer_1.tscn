@@ -21,6 +21,7 @@ max_damage = 12
 slow_player = true
 intensity = 0.3
 duration = 0.8
+blur_screen = true
 destroy_trap_on_end = false
 
 [node name="Lazer" type="Node3D" parent="."]
