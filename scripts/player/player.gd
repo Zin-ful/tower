@@ -114,7 +114,6 @@ var tween = null
 @onready var pause: Control = $Interface/Pause
 @onready var main_menu: Control = $Interface/MainMenu
 @onready var damage_filter: ColorRect = $Interface/HUD/DamageFilter
-@onready var blur_filter: ColorRect = $Interface/HUD/BlurFilter
 
 var respawn_pos: Vector3
 var respawn_rot: Vector3
@@ -598,3 +597,14 @@ func increase_filter(length: float):
 func restore_filter(length: float):
 	tween = create_tween()
 	tween.tween_property(shader_mesh.get_material(), "shader_parameter/pixel_size", pixelization, length)
+
+func impact():
+	shader_mesh.get_material().set("shader_parameter/grayscale", 1.0)
+	shader_mesh.get_material().set("shader_parameter/contrast", 0.6)
+	shader_mesh.get_material().set("shader_parameter/brightness", 0.5)
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(0.25).timeout
+	shader_mesh.get_material().set("shader_parameter/grayscale", 0.0)
+	shader_mesh.get_material().set("shader_parameter/contrast", 1.0)
+	shader_mesh.get_material().set("shader_parameter/brightness", 0.0)
+	Engine.time_scale = 1.0

@@ -73,6 +73,7 @@ func _detect_hitbox(body: Node3D) -> void:
 			body.increase_filter(0.3)
 		if do_damage:
 			body.take_damage(randi_range(min_damage, max_damage))
+			body.impact()
 			body.apply_damage_filter()
 			await get_tree().create_timer(0.2).timeout
 			body.remove_damage_filter()
@@ -81,7 +82,7 @@ func _detect_hitbox(body: Node3D) -> void:
 			body.remove_speed_modifier(SpeedMod.SLOW)
 		if blur_screen:
 			body.restore_filter(1.0)
-			await get_tree().create_timer(1.5).timeout
+			
 			
 func disable_hitbox():
 	damage_area.monitoring = false

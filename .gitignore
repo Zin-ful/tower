@@ -2,3 +2,5 @@
 .godot/
 /android/
 *.mtl
+scenes/player/impact.gdshader
+scenes/player/impact.gdshader.uid

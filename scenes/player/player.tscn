@@ -16,7 +16,8 @@ material = SubResource("ShaderMaterial_lvxji")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dovo2"]
 shader = ExtResource("3_gmlin")
-shader_parameter/pixel_size = 2.0000000475
+shader_parameter/pixel_size = 4.0
+shader_parameter/levels = 32.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4gf2a"]
 
